@@ -1,0 +1,9 @@
+.env**
+.gitignore
+cypress**
+devdb
+testdb
+logs
+.next
+.vscode
+node_modules

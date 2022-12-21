@@ -1,0 +1,15 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: freelance-tool-dev-db
+    ports:
+      - '6500:6500'
+    volumes:
+      - data:/data/freelance-tool-dev-db
+    env_file:
+      - ../.env.local
+      - ../.env
+    network_mode: bridge
+volumes:
+  data:

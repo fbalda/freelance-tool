@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  body {
+    @apply bg-neutral-2 text-white text-sm;
+  }
+
+  /* TODO: Move as much as possible to implementation*/
+  .form-label {
+    @apply w-48 px-2 py-1 text-right mr-1 text-sm;
+  }
+
+  .button {
+    @apply bg-secondary-1 text-neutral-2 rounded-md px-3 py-1;
+  }
+
+  .neutral-button {
+    @apply text-white border border-white rounded-md px-3 py-1;
+  }
+
+  .delete-button {
+    @apply text-red-400 border border-red-400 rounded-md px-3 py-1;
+  }
+
+  .cancel-button {
+    @apply text-white rounded-md px-3 py-1;
+  }
+
+  .form-group {
+    @apply flex flex-col items-end;
+  }
+
+  .form-control {
+    @apply rounded-md h-7 text-sm mb-1 px-2 py-1 bg-neutral-2 text-white border border-black outline-none focus:border-blue-600;
+  }
+
+  .form-control::placeholder {
+    @apply text-neutral-600;
+  }
+
+  .form-control.error {
+    @apply border-red-600;
+  }
+
+  .link {
+    @apply hover:underline text-tertiary;
+  }
+}

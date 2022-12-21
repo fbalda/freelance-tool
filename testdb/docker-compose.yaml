@@ -1,0 +1,10 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: freelance-tool-test-db
+    ports:
+      - '6500:6500'
+    env_file:
+      - ../.env.local
+      - ../.env

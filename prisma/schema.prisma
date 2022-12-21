@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserData {
+  id           String   @id @default(uuid())
+  username     String   @unique @db.VarChar(16)
+  pwhash       String   @db.VarChar(128)
+  salt         String   @db.VarChar(32)
+  totpsecret   String?  @db.VarChar(16)
+  businessName String   @unique @db.VarChar(30)
+  street       String   @db.VarChar(40)
+  houseNumber  String   @db.VarChar(10)
+  city         String   @db.VarChar(40)
+  zip          Int
+  country      String   @db.VarChar(2)
+  phone        String   @db.VarChar(15)
+  email        String   @db.VarChar(128)
+  iban         String   @db.VarChar(34)
+  bic          String   @db.VarChar(11)
+  taxNumber    String   @db.VarChar(60)
+  createdAt    DateTime
+  Client       Client[]
+
+  @@map(name: "user_data")
+}
+
+model Client {
+  id           String      @id @default(uuid())
+  user         UserData    @relation(fields: [userDataId], references: [id])
+  clientNumber Int         @default(autoincrement())
+  name         String      @db.VarChar(30)
+  fullName     String      @db.VarChar(60)
+  careOf       String?     @db.VarChar(30)
+  street       String      @db.VarChar(40)
+  houseNumber  String      @db.VarChar(10)
+  city         String      @db.VarChar(40)
+  zip          Int
+  country      String      @db.VarChar(2)
+  WorkHours    WorkHours[]
+  userDataId   String
+
+  @@unique([userDataId, clientNumber])
+  @@unique([userDataId, name])
+  @@map(name: "client")
+}
+
+model WorkHours {
+  id       String   @id @default(uuid())
+  hours    Int      @db.SmallInt
+  rate     Int      @db.SmallInt
+  client   Client   @relation(fields: [clientId], references: [id])
+  date     DateTime @db.Date
+  clientId String
+}
