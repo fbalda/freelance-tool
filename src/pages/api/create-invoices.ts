@@ -1,12 +1,13 @@
-import prisma from "@lib/db";
-import renderInvoice, { InvoiceData } from "@lib/invoices";
-import { withSessionRouteProtected } from "@lib/withSession";
 import { NextApiRequest, NextApiResponse } from "next";
 import { createTransport } from "nodemailer";
 
+import prisma from "@lib/db";
+import renderInvoice, { InvoiceData } from "@lib/invoices";
+import { withSessionRouteProtected } from "@lib/withSession";
+
 const createInvoicesRoute = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => {
   const now = new Date();
 
@@ -14,7 +15,7 @@ const createInvoicesRoute = async (
   const lastMonthDate = new Date(
     now.getFullYear(),
     // Month -1 is December of previous year, so this works
-    now.getMonth() - 1
+    now.getMonth() - 1,
   );
 
   const workHours = await prisma.workHours.findMany({
@@ -41,7 +42,7 @@ const createInvoicesRoute = async (
 
     data.hoursByRate.set(
       wh.rate,
-      (data.hoursByRate.get(wh.rate) || 0) + wh.hours
+      (data.hoursByRate.get(wh.rate) || 0) + wh.hours,
     );
   });
 

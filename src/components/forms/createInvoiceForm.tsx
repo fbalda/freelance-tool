@@ -3,6 +3,7 @@ import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
+
 import { YearMonths } from "../../pages/api/client/active-months";
 import { ButtonBar, Divider, SelectInputGroup } from "./formElements";
 
@@ -21,7 +22,7 @@ const CreateInvoiceForm = (props: {
     },
     {
       refetchOnMount: true,
-    }
+    },
   );
 
   const [options, setOptions] = useState<string[]>([]);
@@ -31,7 +32,7 @@ const CreateInvoiceForm = (props: {
 
     activeMonths?.forEach((yearMonths) => {
       yearMonths.months.forEach((month) => {
-        tempOptions.push(`${month}/${yearMonths.year}`);
+        tempOptions.push(`${`0${month + 1}`.slice(-2)}/${yearMonths.year}`);
       });
     });
 
@@ -71,7 +72,7 @@ const CreateInvoiceForm = (props: {
               };
             }) || []
           }
-          placeholder="Select Year"
+          placeholder="Select Month"
         />
       </div>
       <>

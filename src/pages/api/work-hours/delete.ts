@@ -12,7 +12,7 @@ interface DeleteWorkHoursApiRequest extends NextApiRequest {
 
 const deleteWorkHoursRoute = async (
   req: DeleteWorkHoursApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => {
   const id = req.body.workHoursId;
 

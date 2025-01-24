@@ -1,7 +1,9 @@
-import { Client } from "@prisma/client";
 import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+import { Client } from "@prisma/client";
+
 import { ButtonBar, Divider, TextInputGroup } from "./formElements";
 
 export type ClientData = Omit<Client, "id"> & { id?: string };
@@ -43,8 +45,7 @@ const ClientForm = (props: {
 
   return (
     <form
-      className="flex flex-col items-stretch justify-end px-4 py-2 
-    w-[48rem]"
+      className="flex w-[48rem] flex-col items-stretch justify-end px-4 py-2"
     >
       <fieldset disabled={disabled}>
         <TextInputGroup
@@ -66,7 +67,7 @@ const ClientForm = (props: {
           rules={{ required: false }}
           register={register}
           errors={errors}
-          className="max-w-[8rem] "
+          className="max-w-[8rem]"
         />
         <Divider />
         <TextInputGroup
@@ -100,7 +101,7 @@ const ClientForm = (props: {
             rules={{ minLength: 3, maxLength: 40, required: true }}
             register={register}
             errors={errors}
-            className="grow shrink-0"
+            className="shrink-0 grow"
           />
           <TextInputGroup
             label="House Number"
@@ -111,7 +112,7 @@ const ClientForm = (props: {
             rules={{ maxLength: 10, required: true }}
             register={register}
             errors={errors}
-            className="shrink min-w-[1rem] max-w-[8rem]"
+            className="min-w-[1rem] max-w-[8rem] shrink"
           />
         </div>
         <div className="flex flex-row gap-2">
@@ -124,7 +125,7 @@ const ClientForm = (props: {
             rules={{ min: "1000", max: "99999", required: true }}
             register={register}
             errors={errors}
-            className="shrink max-w-[6rem]"
+            className="max-w-[6rem] shrink"
           />
           <TextInputGroup
             label="City"

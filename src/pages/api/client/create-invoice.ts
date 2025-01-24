@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import renderInvoice, { InvoiceData } from "@lib/invoices";
 import { withSessionRouteProtected } from "@lib/withSession";
-import { NextApiRequest, NextApiResponse } from "next";
 
 interface CreateInvoiceApiRequest extends NextApiRequest {
   body: {
@@ -16,7 +17,7 @@ export interface YearMonths {
 
 const createInvoiceRoute = async (
   req: CreateInvoiceApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => {
   if (!req.body.clientId) {
     return res.status(400).send({ response: "Invalid client id" });
@@ -27,12 +28,12 @@ const createInvoiceRoute = async (
   const month = Number(splitStrings[0]);
   const year = Number(splitStrings[1]);
 
-  if (!month || !year) {
+  if (isNaN(month) || month <= 0 || month > 12 || isNaN(year)) {
     return res.status(400).send({ response: "Invalid month" });
   }
 
-  const startDate = new Date(year, month);
-  const endDate = new Date(year, month + 1);
+  const startDate = new Date(year, month - 1);
+  const endDate = new Date(year, month);
 
   const client = await prisma.client.findUnique({
     where: {
@@ -49,11 +50,10 @@ const createInvoiceRoute = async (
   });
 
   if (!client) {
-    // This should never happen
-    return res.status(500).send({ response: "Unexpected Error" });
+    return res.status(500).send({ response: "Unexpected error" });
   }
 
-  const serviceDate = new Date();
+  const serviceDate = new Date(endDate);
   serviceDate.setDate(endDate.getDate() - 1);
 
   const invoiceData: InvoiceData = {
@@ -65,7 +65,7 @@ const createInvoiceRoute = async (
   client.WorkHours.forEach((wh) => {
     invoiceData.hoursByRate.set(
       wh.rate,
-      (invoiceData.hoursByRate.get(wh.rate) || 0) + wh.hours
+      (invoiceData.hoursByRate.get(wh.rate) || 0) + wh.hours,
     );
   });
 
@@ -75,7 +75,7 @@ const createInvoiceRoute = async (
     invoiceBuffer = await renderInvoice(
       req.session.userId,
       invoiceData,
-      client.clientNumber
+      client.clientNumber,
     );
   } catch (error) {
     return res.status(500).send({ response: (error as Error).message });

@@ -1,3 +1,8 @@
+import axios from "axios";
+import Router from "next/router";
+import { useContext } from "react";
+import { useMutation } from "react-query";
+
 import SettingsForm, { SettingsData } from "@components/forms/settingsForm";
 import {
   ToolSectionBody,
@@ -8,10 +13,6 @@ import prisma from "@lib/db";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
 import { withSessionSsr } from "@lib/withSession";
-import axios from "axios";
-import Router from "next/router";
-import { useContext } from "react";
-import { useMutation } from "react-query";
 
 const Setup = () => {
   const { addMessage } = useContext(FreelanceToolContext);
@@ -35,7 +36,7 @@ const Setup = () => {
   return (
     <ToolSectionWrapper className="self-center">
       <ToolSectionHeader className="p-4">
-        <h2 className="text-lg text-left">Setup</h2>
+        <h2 className="text-left text-lg">Setup</h2>
       </ToolSectionHeader>
 
       <ToolSectionBody className="py-4">

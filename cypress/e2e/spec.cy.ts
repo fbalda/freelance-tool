@@ -17,7 +17,7 @@ describe("auth tests", () => {
   const login = (
     username: string,
     password: string,
-    expectedStatusCode: number
+    expectedStatusCode: number,
   ) => {
     cy.request({
       method: "POST",

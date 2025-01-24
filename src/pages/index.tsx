@@ -1,21 +1,22 @@
+import axios from "axios";
+import Router from "next/router";
+import { useContext } from "react";
+import { MdPersonAdd, MdRefresh } from "react-icons/md";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+
 import ClientList from "@components/clientList";
 import WorkHoursForm from "@components/forms/workHoursForm";
 import Page from "@components/page";
 import {
   ToolSectionBody,
   ToolSectionHeader,
+  ToolSectionIconButton,
   ToolSectionWrapper,
 } from "@components/toolSection";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { ClientData, useSubmitFunction } from "@lib/hooks";
 import { withSessionSsrProtected } from "@lib/withSession";
 import { WorkHours } from "@prisma/client";
-import axios from "axios";
-import Router from "next/router";
-import { useContext } from "react";
-
-import { MdPersonAdd, MdRefresh } from "react-icons/md";
-import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const FreelanceTool = () => {
   const queryClient = useQueryClient();
@@ -32,7 +33,7 @@ const FreelanceTool = () => {
     },
     {
       refetchOnMount: true,
-    }
+    },
   );
 
   const { mutate } = useMutation(
@@ -45,13 +46,13 @@ const FreelanceTool = () => {
           refetchInactive: true,
         });
       },
-    }
+    },
   );
 
   const addWorkHours = useSubmitFunction(
     mutate,
     addMessage,
-    "Work hours added"
+    "Work hours added",
   );
 
   const onAddClient = async () => {
@@ -63,8 +64,8 @@ const FreelanceTool = () => {
       <ToolSectionWrapper fullWidth>
         <ToolSectionHeader className="pt-4">
           <h2
-            className="pl-4 pb-4 mb-4 text-lg font-bold border-b \
-          border-black"
+            className="mb-4 border-b border-neutral-4 pb-4 pl-4 text-lg
+              font-bold"
           >
             Add Work Hours
           </h2>
@@ -78,21 +79,22 @@ const FreelanceTool = () => {
       <ToolSectionWrapper fullWidth>
         <ToolSectionHeader>
           <div
-            className="py-4 px-4 flex flex-row gap-2 items-center 
-          text-white"
+            className="flex flex-row items-center gap-2 px-4 py-4 text-white"
           >
-            <h2 className="font-bold text-lg">Clients</h2>
-            <button
-              className="link ml-auto"
+            <h2 className="grow text-lg font-bold">Clients</h2>
+            <ToolSectionIconButton
+              icon={MdRefresh}
+              tooltip="Refetch"
               onClick={async () => {
                 await refetch();
               }}
-            >
-              <MdRefresh size={20} />
-            </button>
-            <button className="link" onClick={onAddClient}>
-              <MdPersonAdd size={20} />
-            </button>
+            />
+
+            <ToolSectionIconButton
+              icon={MdPersonAdd}
+              tooltip="Add Client"
+              onClick={onAddClient}
+            />
           </div>
         </ToolSectionHeader>
         <ToolSectionBody className="flex flex-col items-stretch">

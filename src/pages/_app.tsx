@@ -1,8 +1,9 @@
-import FreelanceToolLayout from "@components/layout/FreelanceToolLayout";
-import "@styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { QueryClient } from "react-query";
+
+import FreelanceToolLayout from "@components/layout/FreelanceToolLayout";
+import "@styles/globals.css";
 
 const queryClient = new QueryClient();
 

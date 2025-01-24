@@ -1,7 +1,8 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import logger from "@lib/logger";
 import { getUserById, validateTotp } from "@lib/user";
 import { withSessionRoute } from "@lib/withSession";
-import { NextApiRequest, NextApiResponse } from "next";
 
 const totpTimeout = 1000 * 60; // 1 minute in ms
 

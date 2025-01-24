@@ -1,3 +1,8 @@
+import axios from "axios";
+import Router from "next/router";
+import { useContext, useState } from "react";
+import { useMutation } from "react-query";
+
 import {
   ToolSectionBody,
   ToolSectionHeader,
@@ -7,10 +12,7 @@ import prisma from "@lib/db";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
 import { withSessionSsr } from "@lib/withSession";
-import axios from "axios";
-import Router from "next/router";
-import { useContext, useState } from "react";
-import { useMutation } from "react-query";
+
 import LoginForm, { LoginCredentials } from "../components/forms/loginForm";
 
 const Login = () => {
@@ -50,7 +52,7 @@ const Login = () => {
   return (
     <ToolSectionWrapper className="self-center">
       <ToolSectionHeader className="p-4">
-        <h2 className="text-lg text-center">Login</h2>
+        <h2 className="text-center text-lg">Login</h2>
       </ToolSectionHeader>
 
       <ToolSectionBody className="p-4">

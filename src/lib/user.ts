@@ -1,7 +1,9 @@
-import { SettingsData } from "@components/forms/settingsForm";
-import { UserData } from "@prisma/client";
 import crypto from "crypto";
 import { authenticator } from "otplib";
+
+import { SettingsData } from "@components/forms/settingsForm";
+import { UserData } from "@prisma/client";
+
 import prisma from "./db";
 
 const createPasswordHashAndSalt = (password: string) => {
@@ -46,7 +48,7 @@ export const createUser = async (data: SettingsData) => {
 
 export const updateSettings = async (
   userId: string,
-  data: Partial<SettingsData>
+  data: Partial<SettingsData>,
 ) => {
   const { currentPassword, password, ...updateData } = data;
 

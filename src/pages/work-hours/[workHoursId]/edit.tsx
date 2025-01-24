@@ -1,14 +1,18 @@
-import WorkHoursForm, { WorkHoursData } from "@components/forms/workHoursForm";
-import Page from "@components/page";
-import { ToolSectionHeader, ToolSectionWrapper } from "@components/toolSection";
-import prisma from "@lib/db";
-import FreelanceToolContext from "@lib/freelanceToolContext";
-import { withSessionSsrProtected } from "@lib/withSession";
-import { Client, WorkHours } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import Router from "next/router";
 import { useContext } from "react";
 import { useMutation } from "react-query";
+
+import WorkHoursForm, { WorkHoursData } from "@components/forms/workHoursForm";
+import Page from "@components/page";
+import {
+  ToolSectionHeader,
+  ToolSectionWrapper,
+} from "@components/toolSection";
+import prisma from "@lib/db";
+import FreelanceToolContext from "@lib/freelanceToolContext";
+import { withSessionSsrProtected } from "@lib/withSession";
+import { Client, WorkHours } from "@prisma/client";
 
 interface EditWorkHoursProps {
   workHoursData: Omit<WorkHours, "date"> & { dateISOString: string };
@@ -26,7 +30,7 @@ const EditWorkHours = (props: EditWorkHoursProps) => {
   const { mutate: deleteMutate } = useMutation(
     async (data: { workHoursId: string }) => {
       await axios.post(`/api/work-hours/delete`, data);
-    }
+    },
   );
 
   const modifyWorkHours = async (data: WorkHoursData) => {
@@ -47,7 +51,7 @@ const EditWorkHours = (props: EditWorkHoursProps) => {
       addMessage(
         ((error as AxiosError).response?.data as { response: string })
           .response || "Unknown error",
-        "error"
+        "error",
       );
     }
   };
@@ -65,7 +69,7 @@ const EditWorkHours = (props: EditWorkHoursProps) => {
             onError: (error) => {
               reject(error);
             },
-          }
+          },
         );
       });
 
@@ -75,7 +79,7 @@ const EditWorkHours = (props: EditWorkHoursProps) => {
       addMessage(
         ((error as AxiosError).response?.data as { response: string })
           .response || "Unknown error",
-        "error"
+        "error",
       );
     }
   };
@@ -83,12 +87,12 @@ const EditWorkHours = (props: EditWorkHoursProps) => {
   return (
     <Page menu={false}>
       <ToolSectionWrapper className="self-center">
-        <ToolSectionHeader className="pt-4 pb-4">
+        <ToolSectionHeader className="pb-4 pt-4">
           <div
-            className="px-4 pb-4 mb-4 flex flex-row items-center \
-            text-white border-b border-black"
+            className="mb-4 flex flex-row items-center border-b border-black
+              px-4 pb-4 text-white"
           >
-            <h2 className="font-bold text-lg grow">Edit Work Hours</h2>
+            <h2 className="grow text-lg font-bold">Edit Work Hours</h2>
           </div>
           <WorkHoursForm
             type="edit"
@@ -157,7 +161,7 @@ export const getServerSideProps = withSessionSsrProtected(
         },
       },
     };
-  }
+  },
 );
 
 export default EditWorkHours;

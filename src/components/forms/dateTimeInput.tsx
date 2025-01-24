@@ -1,4 +1,5 @@
 import { FieldValues } from "react-hook-form";
+
 import { InputProps } from "./input";
 
 export type DateTimeInputProps<TFieldValues extends FieldValues> =
@@ -8,7 +9,7 @@ export type DateTimeInputProps<TFieldValues extends FieldValues> =
   };
 
 const DateTimeInput = <TFieldValues extends FieldValues>(
-  props: DateTimeInputProps<TFieldValues> & { error?: boolean }
+  props: DateTimeInputProps<TFieldValues> & { error?: boolean },
 ) => {
   return (
     <input

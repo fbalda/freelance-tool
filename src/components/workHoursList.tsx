@@ -1,7 +1,10 @@
-import { WorkHours } from "@prisma/client";
 import Router from "next/router";
 import { MdEdit } from "react-icons/md";
+
+import { WorkHours } from "@prisma/client";
+
 import Spinner from "./spinner";
+import { ToolSectionIconButton } from "./toolSection";
 
 const WorkHoursList = (props: {
   workHours: WorkHours[];
@@ -20,13 +23,13 @@ const WorkHoursList = (props: {
           <col className="w-12" />
         </colgroup>
 
-        <thead className="bg-neutral-1 border-b border-black">
+        <thead className="border-b border-black bg-neutral-1">
           <tr className="">
             <th className="my-4 pl-4">Date</th>
-            <th className="mx-4 border-l pl-4 border-black">Hours</th>
-            <th className="mx-4 py-2 border-l pl-4 border-black">Rate</th>
-            <th className="mx-4 py-2 border-l pl-4 border-black">Revenue</th>
-            <th className="mx-4 py-2 border-l pl-4 border-black" />
+            <th className="mx-4 border-l border-black pl-4">Hours</th>
+            <th className="mx-4 border-l border-black py-2 pl-4">Rate</th>
+            <th className="mx-4 border-l border-black py-2 pl-4">Revenue</th>
+            <th className="mx-4 border-l border-black py-2 pl-4" />
           </tr>
         </thead>
         <tbody className="min-h-[12%] px-4">
@@ -34,27 +37,26 @@ const WorkHoursList = (props: {
             props.workHours.map((workHours, index) => {
               return (
                 <tr
-                  className="border-neutral-2 border-b last:border-0 \
-                    last:mb-0 last:pb-0"
+                  className="border-b border-neutral-2 last:mb-0 last:border-0
+                    last:pb-0"
                   key={index}
                 >
-                  <td className="pl-4 py-2">{`${new Date(
-                    workHours.date
+                  <td className="py-2 pl-4">{`${new Date(
+                    workHours.date,
                   ).toDateString()}`}</td>
-                  <td className="pl-4 py-2">{`${workHours.hours}h`}</td>
-                  <td className="pl-4 py-2">{`${workHours.rate}€`}</td>
-                  <td className="pl-4 py-2">{`${
+                  <td className="py-2 pl-4">{`${workHours.hours}h`}</td>
+                  <td className="py-2 pl-4">{`${workHours.rate}€`}</td>
+                  <td className="py-2 pl-4">{`${
                     workHours.rate * workHours.hours
                   }€`}</td>
                   <td className="text-center">
-                    <button
-                      className="link"
+                    <ToolSectionIconButton
+                      icon={MdEdit}
+                      tooltip="Edit"
                       onClick={async () => {
                         await Router.push(`/work-hours/${workHours.id}/edit`);
                       }}
-                    >
-                      <MdEdit size={20} />
-                    </button>
+                    />
                   </td>
                 </tr>
               );
@@ -63,7 +65,7 @@ const WorkHoursList = (props: {
       </table>
 
       {props.status === "success" && props.workHours.length === 0 && (
-        <div className="text-center py-1">Empty</div>
+        <div className="py-1 text-center">Empty</div>
       )}
 
       {props.status === "loading" && (

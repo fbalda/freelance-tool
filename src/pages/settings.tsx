@@ -1,3 +1,7 @@
+import axios from "axios";
+import { useContext } from "react";
+import { useMutation, useQueryClient } from "react-query";
+
 import SettingsForm, { SettingsData } from "@components/forms/settingsForm";
 import Page from "@components/page";
 import {
@@ -9,9 +13,6 @@ import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
 import logger from "@lib/logger";
 import { withSessionSsrProtected } from "@lib/withSession";
-import axios from "axios";
-import { useContext } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 const Settings = (props: SettingsData) => {
   const queryClient = useQueryClient();
@@ -27,7 +28,7 @@ const Settings = (props: SettingsData) => {
           refetchInactive: true,
         });
       },
-    }
+    },
   );
 
   const saveChanges = useSubmitFunction(mutate, addMessage, "Changes saved!");
@@ -36,9 +37,9 @@ const Settings = (props: SettingsData) => {
     <Page backButton>
       <ToolSectionWrapper fullWidth>
         <ToolSectionHeader>
-          <h2 className="font-bold text-lg p-4">Settings</h2>
+          <h2 className="p-4 text-lg font-bold">Settings</h2>
         </ToolSectionHeader>
-        <ToolSectionBody className="flex flex-col items-stretch p-4 text-md">
+        <ToolSectionBody className="text-md flex flex-col items-stretch p-4">
           <SettingsForm
             type="edit"
             onSubmit={saveChanges}
@@ -58,7 +59,7 @@ export const getServerSideProps = withSessionSsrProtected(async ({ req }) => {
   if (!userData) {
     // Failsafe, this should never happen
     logger.error(
-      `No user data found for logged in user with id ${req.session.userId} `
+      `No user data found for logged in user with id ${req.session.userId} `,
     );
     return {
       redirect: {
@@ -68,7 +69,8 @@ export const getServerSideProps = withSessionSsrProtected(async ({ req }) => {
     };
   }
 
-  const { pwhash, salt, createdAt, totpsecret, id, ...settingsData } = userData;
+  const { pwhash, salt, createdAt, totpsecret, id, ...settingsData } =
+    userData;
 
   return {
     props: settingsData,

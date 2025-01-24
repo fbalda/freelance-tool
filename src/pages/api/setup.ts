@@ -1,9 +1,10 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import { SettingsData } from "@components/forms/settingsForm";
 import prisma from "@lib/db";
 import logger from "@lib/logger";
 import { createUser } from "@lib/user";
 import { withSessionRoute } from "@lib/withSession";
-import { NextApiRequest, NextApiResponse } from "next";
 
 interface SetupApiRequest extends NextApiRequest {
   body: SettingsData;

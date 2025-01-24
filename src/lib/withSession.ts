@@ -1,5 +1,8 @@
 import { IronSessionOptions } from "iron-session";
-import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
+import {
+  withIronSessionApiRoute,
+  withIronSessionSsr,
+} from "iron-session/next";
 import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
@@ -29,31 +32,33 @@ export const withSessionRoute = (handler: NextApiHandler) => {
 };
 
 export const withSessionRouteProtected = (handler: NextApiHandler) => {
-  return withSessionRoute(async (req: NextApiRequest, res: NextApiResponse) => {
-    if (!req.session.authorized) {
-      return res.status(401).send("Unauthorized");
-    }
+  return withSessionRoute(
+    async (req: NextApiRequest, res: NextApiResponse) => {
+      if (!req.session.authorized) {
+        return res.status(401).send("Unauthorized");
+      }
 
-    await handler(req, res);
-  });
+      await handler(req, res);
+    },
+  );
 };
 
 export const withSessionSsr = <
-  P extends { [key: string]: unknown } = { [key: string]: unknown }
+  P extends { [key: string]: unknown } = { [key: string]: unknown },
 >(
   handler: (
-    context: GetServerSidePropsContext
-  ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
+    context: GetServerSidePropsContext,
+  ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>,
 ) => {
   return withIronSessionSsr(handler, sessionOptions);
 };
 
 export const withSessionSsrProtected = <
-  P extends { [key: string]: unknown } = { [key: string]: unknown }
+  P extends { [key: string]: unknown } = { [key: string]: unknown },
 >(
   handler: (
-    context: GetServerSidePropsContext
-  ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
+    context: GetServerSidePropsContext,
+  ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>,
 ) => {
   return withSessionSsr((context) => {
     if (!context.req.session.authorized) {

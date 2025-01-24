@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import prisma from "@lib/db";
 import { withSessionRouteProtected } from "@lib/withSession";
-import { NextApiRequest, NextApiResponse } from "next";
 
 // TODO: Put client ID in request body instead of query
 const clientDataRoute = async (req: NextApiRequest, res: NextApiResponse) => {

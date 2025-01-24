@@ -1,5 +1,7 @@
-import { ClientData } from "@lib/hooks";
 import Link from "next/link";
+
+import { ClientData } from "@lib/hooks";
+
 import Spinner from "./spinner";
 
 const ClientList = (props: {
@@ -16,15 +18,17 @@ const ClientList = (props: {
           <col className="w-60" />
         </colgroup>
 
-        <thead className="bg-neutral-1 border-b border-black">
+        <thead className="border-b border-neutral-0 bg-neutral-2">
           <tr className="">
             <th className="my-4 pl-4">Name</th>
-            <th className="my-4 border-l pl-4 border-black">Client Number</th>
-            <th className="mx-4 py-2 border-l pl-4 border-black">
-              Work Last Month
+            <th className="my-4 border-l border-neutral-0 pl-4">
+              Client Number
             </th>
-            <th className="mx-4 border-l pl-4 border-black">
-              Work Current Month
+            <th className="mx-4 border-l border-neutral-0 py-2 pl-4">
+              Last Month
+            </th>
+            <th className="mx-4 border-l border-neutral-0 pl-4">
+              Current Month
             </th>
           </tr>
         </thead>
@@ -33,11 +37,11 @@ const ClientList = (props: {
             props.clients.map((client, index) => {
               return (
                 <tr
-                  className="border-neutral-2 border-b last:border-0 \
-                    last:mb-0 last:pb-0"
+                  className="border-b border-neutral-2 last:mb-0 last:border-0
+                    last:pb-0"
                   key={index}
                 >
-                  <td className="pl-4 py-2">
+                  <td className="py-2 pl-4">
                     <Link
                       className="link"
                       href={`/clients/${encodeURIComponent(client.id)}`}
@@ -45,14 +49,14 @@ const ClientList = (props: {
                       {client.name}
                     </Link>
                   </td>
-                  <td className="pl-4 py-2">{`${(
+                  <td className="py-2 pl-4">{`${(
                     "0000" + client.clientNumber.toString()
                   ).slice(-5)}`}</td>
-                  <td className="pl-4 py-2">
+                  <td className="py-2 pl-4">
                     {`${client.lastMonthRevenue}€ /\
                      ${client.lastMonthHours}h`}
                   </td>
-                  <td className="pl-4 py-2 text-green-300">
+                  <td className="py-2 pl-4 text-green-300">
                     {`${client.currentMonthRevenue}€ / \
                       ${client.currentMonthHours}h`}
                   </td>
@@ -63,7 +67,7 @@ const ClientList = (props: {
       </table>
 
       {props.status === "success" && props.clients.length === 0 && (
-        <div className="text-center py-1">Empty</div>
+        <div className="py-1 text-center">Empty</div>
       )}
 
       {props.status === "loading" && (

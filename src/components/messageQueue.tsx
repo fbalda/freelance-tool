@@ -1,5 +1,6 @@
+import { FaXmark } from "react-icons/fa6";
+
 import { Message } from "@lib/hooks";
-import { HiXMark } from "react-icons/hi2";
 
 const MessageQueue = (props: {
   messages: Message[];
@@ -7,8 +8,8 @@ const MessageQueue = (props: {
 }) => {
   return (
     <div
-      className="fixed right-4 top-4 flex flex-col items-stretch \
-    max-w-lg gap-2"
+      className="fixed right-4 top-4 flex max-w-lg flex-col items-stretch
+        gap-2"
     >
       {props.messages.map((message) => {
         let color = "";
@@ -27,8 +28,8 @@ const MessageQueue = (props: {
 
         return (
           <div
-            className={`p-3 ${color} rounded-md text-white flex flex-row \
-            items-center justify-end`}
+            className={`p-3 ${color} flex flex-row items-center justify-end
+            rounded-md text-white`}
             key={message.id}
           >
             <div className="mr-2">{message.caption}</div>
@@ -37,7 +38,7 @@ const MessageQueue = (props: {
                 props.removeMessage(message.id);
               }}
             >
-              <HiXMark />
+              <FaXmark />
             </button>
           </div>
         );

@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getUserByUsername, validatePassword } from "../../lib/user";
 
 import logger from "@lib/logger";
 import { withSessionRoute } from "@lib/withSession";
+
+import { getUserByUsername, validatePassword } from "../../lib/user";
 
 interface LoginApiRequest extends NextApiRequest {
   body: {

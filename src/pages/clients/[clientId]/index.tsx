@@ -1,17 +1,19 @@
+import axios from "axios";
+import Router from "next/router";
+import { MdEdit, MdRefresh, MdRequestPage } from "react-icons/md";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+
 import Page from "@components/page";
 import {
   ToolSectionBody,
   ToolSectionHeader,
+  ToolSectionIconButton,
   ToolSectionWrapper,
 } from "@components/toolSection";
 import WorkHoursList from "@components/workHoursList";
 import prisma from "@lib/db";
 import { withSessionSsrProtected } from "@lib/withSession";
 import { Client, WorkHours } from "@prisma/client";
-import axios from "axios";
-import Router from "next/router";
-import { MdEdit, MdRefresh, MdRequestPage } from "react-icons/md";
-import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const ClientDashboard = (props: Omit<Client, "userDataId">) => {
   const queryClient = useQueryClient();
@@ -27,7 +29,7 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
     },
     {
       refetchOnMount: true,
-    }
+    },
   );
 
   const { mutate } = useMutation(
@@ -40,7 +42,7 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
           refetchInactive: true,
         });
       },
-    }
+    },
   );
 
   const removeWorkHours = (id: number) => {
@@ -61,31 +63,29 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
       <ToolSectionWrapper fullWidth>
         <ToolSectionHeader>
           <div
-            className="p-4 flex flex-row items-center text-white \
-          border-b border-black gap-2"
+            className="flex flex-row items-center gap-2 border-b border-black
+              p-4 text-white"
           >
-            <h2 className="font-bold text-lg grow">{props.name}</h2>
-            <button
-              className="link"
+            <h2 className="grow text-lg font-bold">{props.name}</h2>
+            <ToolSectionIconButton
+              icon={MdRequestPage}
+              tooltip={"Create Invoice"}
               onClick={async () => {
                 await Router.push(`/clients/${props.id}/create-invoice`);
               }}
-            >
-              <MdRequestPage size={20} />
-            </button>
-            <button
-              className="link"
+            />
+            <ToolSectionIconButton
+              icon={MdEdit}
+              tooltip={"Edit"}
               onClick={async () => {
                 await Router.push(`/clients/${props.id}/edit`);
               }}
-            >
-              <MdEdit size={20} />
-            </button>
+            />
           </div>
 
-          <section className="px-4 pb-4 text-sm mt-4 flex flex-row gap-20">
+          <section className="mt-4 flex flex-row gap-20 px-4 pb-4 text-sm">
             <div>
-              <h3 className="font-bold text-xs mb-2 mt-4">Address</h3>
+              <h3 className="mb-2 mt-4 text-xs font-bold">Address</h3>
               {props.fullName}
               <br />
               {props.careOf && (
@@ -99,21 +99,20 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
               {props.zip} {props.city}
             </div>
             <div>
-              <h3 className="font-bold text-xs mb-2 mt-4">Client Number</h3>
+              <h3 className="mb-2 mt-4 text-xs font-bold">Client Number</h3>
               {("0000" + props.clientNumber.toString()).slice(-5)}
             </div>
           </section>
 
-          <div className="flex flex-row border-t p-4 border-black gap-2">
-            <h2 className="font-bold text-md">Work Hours</h2>
-            <button
-              className="link ml-auto"
+          <div className="flex flex-row gap-2 border-t border-black p-4">
+            <h2 className="text-md grow font-bold">Work Hours</h2>
+            <ToolSectionIconButton
+              icon={MdRefresh}
+              tooltip="Refetch"
               onClick={async () => {
                 await refetch();
               }}
-            >
-              <MdRefresh size={20} />
-            </button>
+            />
           </div>
         </ToolSectionHeader>
         <ToolSectionBody className="flex flex-col items-stretch">
@@ -129,26 +128,28 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
   );
 };
 
-export const getServerSideProps = withSessionSsrProtected(async ({ query }) => {
-  const clientId = query.clientId as string;
-  const client = await prisma.client.findUnique({
-    where: { id: clientId },
-  });
+export const getServerSideProps = withSessionSsrProtected(
+  async ({ query }) => {
+    const clientId = query.clientId as string;
+    const client = await prisma.client.findUnique({
+      where: { id: clientId },
+    });
 
-  if (!client) {
+    if (!client) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+
+    const { userDataId, ...propsData } = client;
+
     return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
+      props: propsData,
     };
-  }
-
-  const { userDataId, ...propsData } = client;
-
-  return {
-    props: propsData,
-  };
-});
+  },
+);
 
 export default ClientDashboard;

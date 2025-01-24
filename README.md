@@ -27,10 +27,11 @@ If you want to test without an SSL certificate set `--env NODE_ENV=development` 
 
 ## TODOs
 
+- Rigorous automated testing
 - Automated docker image building/publishing
-- 2-Factor authentication with TOTP
+- 2-factor authentication with TOTP
 - Automated invoice creation (idea is to send them to your email account automatically, so you can just forward them after checking for errors)
-- Polish/streamline GUI
+- Polish/streamline gui
 - Code cleanup
 
 ## Known issues
