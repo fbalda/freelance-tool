@@ -6,9 +6,10 @@ import { useMutation } from "react-query";
 import ClientForm, { ClientData } from "@components/forms/clientForm";
 import Page from "@components/page";
 import {
-  ToolSectionHeader,
-  ToolSectionWrapper,
-} from "@components/toolSection";
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
 import prisma from "@lib/db";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
@@ -50,8 +51,10 @@ const EditClient = (props: EditClientProps) => {
 
   return (
     <Page menu={false}>
-      <ToolSectionWrapper className="self-center">
-        <ToolSectionHeader className="pb-4 pt-4">
+      <PanelWrapper className="self-center">
+        <PanelHeader className="pb-4 pt-4">
+          <h2 className="grow text-lg font-bold"> Edit Client</h2>
+
           <div
             className="mb-4 flex flex-row items-center border-b border-black
               px-4 pb-4 text-white"
@@ -69,8 +72,9 @@ const EditClient = (props: EditClientProps) => {
               defaultValues={props}
             />
           </div>
-        </ToolSectionHeader>
-      </ToolSectionWrapper>
+        </PanelHeader>
+        <PanelBody></PanelBody>
+      </PanelWrapper>
     </Page>
   );
 };

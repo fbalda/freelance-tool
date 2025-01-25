@@ -5,10 +5,10 @@ import { useMutation } from "react-query";
 
 import SettingsForm, { SettingsData } from "@components/forms/settingsForm";
 import {
-  ToolSectionBody,
-  ToolSectionHeader,
-  ToolSectionWrapper,
-} from "@components/toolSection";
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
 import prisma from "@lib/db";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
@@ -34,15 +34,15 @@ const Setup = () => {
   const handleSubmit = useSubmitFunction(mutate, addMessage, "User created");
 
   return (
-    <ToolSectionWrapper className="self-center">
-      <ToolSectionHeader className="p-4">
+    <PanelWrapper className="self-center">
+      <PanelHeader className="p-4">
         <h2 className="text-left text-lg">Setup</h2>
-      </ToolSectionHeader>
+      </PanelHeader>
 
-      <ToolSectionBody className="py-4">
+      <PanelBody className="py-4">
         <SettingsForm onSubmit={handleSubmit} type={"add"} />
-      </ToolSectionBody>
-    </ToolSectionWrapper>
+      </PanelBody>
+    </PanelWrapper>
   );
 };
 

@@ -13,7 +13,7 @@
   }
 
   .button {
-    @apply rounded-md bg-secondary-1 px-3 py-1 text-neutral-2;
+    @apply rounded-md bg-secondary-1 px-3 py-1 text-neutral-6;
   }
 
   .neutral-button {

@@ -1,7 +1,7 @@
 import { MouseEventHandler, PropsWithChildren } from "react";
 import { IconType } from "react-icons";
 
-export const ToolSectionHeader = (
+export const PanelHeader = (
   props: PropsWithChildren<{ className?: string }>,
 ) => {
   return (
@@ -11,13 +11,15 @@ export const ToolSectionHeader = (
   );
 };
 
-export const ToolSectionBody = (
+export const PanelBody = (
   props: PropsWithChildren<{ className?: string }>,
 ) => {
-  return <div className={props.className}>{props.children}</div>;
+  return (
+    <div className={`${props.className} bg-neutral-6`}>{props.children}</div>
+  );
 };
 
-export const ToolSectionWrapper = (
+export const PanelWrapper = (
   props: PropsWithChildren<{ fullWidth?: boolean; className?: string }>,
 ) => {
   return (
@@ -31,7 +33,7 @@ export const ToolSectionWrapper = (
   );
 };
 
-export const ToolSectionIconButton = (props: {
+export const PanelIconButton = (props: {
   icon: IconType;
   tooltip: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;

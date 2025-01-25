@@ -8,11 +8,11 @@ import ClientList from "@components/clientList";
 import WorkHoursForm from "@components/forms/workHoursForm";
 import Page from "@components/page";
 import {
-  ToolSectionBody,
-  ToolSectionHeader,
-  ToolSectionIconButton,
-  ToolSectionWrapper,
-} from "@components/toolSection";
+  PanelBody,
+  PanelHeader,
+  PanelIconButton,
+  PanelWrapper,
+} from "@components/panels/panel";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { ClientData, useSubmitFunction } from "@lib/hooks";
 import { withSessionSsrProtected } from "@lib/withSession";
@@ -61,8 +61,8 @@ const FreelanceTool = () => {
 
   return (
     <Page>
-      <ToolSectionWrapper fullWidth>
-        <ToolSectionHeader className="pt-4">
+      <PanelWrapper fullWidth>
+        <PanelHeader className="pt-4">
           <h2
             className="mb-4 border-b border-neutral-4 pb-4 pl-4 text-lg
               font-bold"
@@ -74,15 +74,15 @@ const FreelanceTool = () => {
             onSubmit={addWorkHours}
             clients={clients || []}
           />
-        </ToolSectionHeader>
-      </ToolSectionWrapper>
-      <ToolSectionWrapper fullWidth>
-        <ToolSectionHeader>
+        </PanelHeader>
+      </PanelWrapper>
+      <PanelWrapper fullWidth>
+        <PanelHeader>
           <div
             className="flex flex-row items-center gap-2 px-4 py-4 text-white"
           >
             <h2 className="grow text-lg font-bold">Clients</h2>
-            <ToolSectionIconButton
+            <PanelIconButton
               icon={MdRefresh}
               tooltip="Refetch"
               onClick={async () => {
@@ -90,17 +90,17 @@ const FreelanceTool = () => {
               }}
             />
 
-            <ToolSectionIconButton
+            <PanelIconButton
               icon={MdPersonAdd}
               tooltip="Add Client"
               onClick={onAddClient}
             />
           </div>
-        </ToolSectionHeader>
-        <ToolSectionBody className="flex flex-col items-stretch">
+        </PanelHeader>
+        <PanelBody className="flex flex-col items-stretch">
           <ClientList status={status} clients={clients || []} />
-        </ToolSectionBody>
-      </ToolSectionWrapper>
+        </PanelBody>
+      </PanelWrapper>
     </Page>
   );
 };

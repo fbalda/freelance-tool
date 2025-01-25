@@ -5,11 +5,11 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import Page from "@components/page";
 import {
-  ToolSectionBody,
-  ToolSectionHeader,
-  ToolSectionIconButton,
-  ToolSectionWrapper,
-} from "@components/toolSection";
+  PanelBody,
+  PanelHeader,
+  PanelIconButton,
+  PanelWrapper,
+} from "@components/panels/panel";
 import WorkHoursList from "@components/workHoursList";
 import prisma from "@lib/db";
 import { withSessionSsrProtected } from "@lib/withSession";
@@ -60,21 +60,21 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
 
   return (
     <Page backButton>
-      <ToolSectionWrapper fullWidth>
-        <ToolSectionHeader>
+      <PanelWrapper fullWidth>
+        <PanelHeader>
           <div
             className="flex flex-row items-center gap-2 border-b border-black
               p-4 text-white"
           >
             <h2 className="grow text-lg font-bold">{props.name}</h2>
-            <ToolSectionIconButton
+            <PanelIconButton
               icon={MdRequestPage}
               tooltip={"Create Invoice"}
               onClick={async () => {
                 await Router.push(`/clients/${props.id}/create-invoice`);
               }}
             />
-            <ToolSectionIconButton
+            <PanelIconButton
               icon={MdEdit}
               tooltip={"Edit"}
               onClick={async () => {
@@ -106,7 +106,7 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
 
           <div className="flex flex-row gap-2 border-t border-black p-4">
             <h2 className="text-md grow font-bold">Work Hours</h2>
-            <ToolSectionIconButton
+            <PanelIconButton
               icon={MdRefresh}
               tooltip="Refetch"
               onClick={async () => {
@@ -114,16 +114,16 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
               }}
             />
           </div>
-        </ToolSectionHeader>
-        <ToolSectionBody className="flex flex-col items-stretch">
+        </PanelHeader>
+        <PanelBody className="flex flex-col items-stretch">
           <WorkHoursList
             status={status}
             workHours={workHours || []}
             removeWorkHours={removeWorkHours}
             clientName={props.name}
           />
-        </ToolSectionBody>
-      </ToolSectionWrapper>
+        </PanelBody>
+      </PanelWrapper>
     </Page>
   );
 };

@@ -5,10 +5,7 @@ import { useMutation } from "react-query";
 
 import CreateInvoiceForm from "@components/forms/createInvoiceForm";
 import Page from "@components/page";
-import {
-  ToolSectionHeader,
-  ToolSectionWrapper,
-} from "@components/toolSection";
+import { PanelHeader, PanelWrapper } from "@components/panels/panel";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
 import { withSessionSsrProtected } from "@lib/withSession";
@@ -49,8 +46,8 @@ const CreateClientInvoice = (props: CreateClientInvoiceProps) => {
 
   return (
     <Page menu={false} backButton>
-      <ToolSectionWrapper className="self-center">
-        <ToolSectionHeader className="pb-4 pt-4">
+      <PanelWrapper className="self-center">
+        <PanelHeader className="pb-4 pt-4">
           <div
             className="mb-4 flex flex-row items-center border-b border-black
               px-4 pb-4 text-white"
@@ -64,8 +61,8 @@ const CreateClientInvoice = (props: CreateClientInvoiceProps) => {
               clientId={props.clientId}
             />
           </div>
-        </ToolSectionHeader>
-      </ToolSectionWrapper>
+        </PanelHeader>
+      </PanelWrapper>
     </Page>
   );
 };

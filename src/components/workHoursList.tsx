@@ -3,8 +3,8 @@ import { MdEdit } from "react-icons/md";
 
 import { WorkHours } from "@prisma/client";
 
+import { PanelIconButton } from "./panels/panel";
 import Spinner from "./spinner";
-import { ToolSectionIconButton } from "./toolSection";
 
 const WorkHoursList = (props: {
   workHours: WorkHours[];
@@ -50,7 +50,7 @@ const WorkHoursList = (props: {
                     workHours.rate * workHours.hours
                   }€`}</td>
                   <td className="text-center">
-                    <ToolSectionIconButton
+                    <PanelIconButton
                       icon={MdEdit}
                       tooltip="Edit"
                       onClick={async () => {

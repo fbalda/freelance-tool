@@ -44,7 +44,7 @@ const HamburgerMenu = (props: {
       {isOpen ? (
         <div
           className="z-1 text-md absolute right-0 top-full flex flex-col gap-2
-            rounded-md border border-black bg-neutral-1 p-4 pr-8 text-right
+            rounded-md border border-neutral-7 bg-neutral-4 p-4 pr-8 text-right
             shadow-xl"
         >
           {props.entries.map((entry, index) => (

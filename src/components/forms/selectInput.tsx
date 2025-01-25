@@ -26,7 +26,7 @@ const SelectInput = <TFieldValues extends FieldValues>(
       defaultValue={props.defaultValue || ""}
       aria-invalid={props.error ? true : false}
       className={`form-control ${props.error ? "error" : ""} ${
-        props.defaultValue || wasChanged ? "" : "text-neutral-4" }
+        props.defaultValue || wasChanged ? "" : "text-neutral-3" }
         ${props.className ? props.className : ""}`}
       {...props.register(props.field, rules)}
       onChange={(event) => {

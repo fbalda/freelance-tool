@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ClientData } from "@lib/hooks";
 
+import { Table, TableBody, TableColumns } from "./panels/table";
 import Spinner from "./spinner";
 
 const ClientList = (props: {
@@ -10,29 +11,16 @@ const ClientList = (props: {
 }) => {
   return (
     <>
-      <table className="text-left">
-        <colgroup>
-          <col className="" />
-          <col className="w-40" />
-          <col className="w-60" />
-          <col className="w-60" />
-        </colgroup>
-
-        <thead className="border-b border-neutral-0 bg-neutral-2">
-          <tr className="">
-            <th className="my-4 pl-4">Name</th>
-            <th className="my-4 border-l border-neutral-0 pl-4">
-              Client Number
-            </th>
-            <th className="mx-4 border-l border-neutral-0 py-2 pl-4">
-              Last Month
-            </th>
-            <th className="mx-4 border-l border-neutral-0 pl-4">
-              Current Month
-            </th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table>
+        <TableColumns
+          columns={[
+            { title: "Name" },
+            { title: "Client Number", width: 10 },
+            { title: "Last Month", width: 10 },
+            { title: "Current Month", width: 10 },
+          ]}
+        />
+        <TableBody>
           {props.status === "success" &&
             props.clients.map((client, index) => {
               return (
@@ -63,9 +51,8 @@ const ClientList = (props: {
                 </tr>
               );
             })}
-        </tbody>
-      </table>
-
+        </TableBody>
+      </Table>
       {props.status === "success" && props.clients.length === 0 && (
         <div className="py-1 text-center">Empty</div>
       )}

@@ -4,10 +4,10 @@ import { useContext, useState } from "react";
 import { useMutation } from "react-query";
 
 import {
-  ToolSectionBody,
-  ToolSectionHeader,
-  ToolSectionWrapper,
-} from "@components/toolSection";
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
 import prisma from "@lib/db";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
@@ -50,15 +50,15 @@ const Login = () => {
   const handleSubmit = useSubmitFunction(mutate, addMessage, "Logged in");
 
   return (
-    <ToolSectionWrapper className="self-center">
-      <ToolSectionHeader className="p-4">
+    <PanelWrapper className="self-center">
+      <PanelHeader className="p-4">
         <h2 className="text-center text-lg">Login</h2>
-      </ToolSectionHeader>
+      </PanelHeader>
 
-      <ToolSectionBody className="p-4">
+      <PanelBody className="p-4">
         <LoginForm totpStep={totpStep} onSubmit={handleSubmit} />
-      </ToolSectionBody>
-    </ToolSectionWrapper>
+      </PanelBody>
+    </PanelWrapper>
   );
 };
 

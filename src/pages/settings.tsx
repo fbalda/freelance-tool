@@ -5,10 +5,10 @@ import { useMutation, useQueryClient } from "react-query";
 import SettingsForm, { SettingsData } from "@components/forms/settingsForm";
 import Page from "@components/page";
 import {
-  ToolSectionBody,
-  ToolSectionHeader,
-  ToolSectionWrapper,
-} from "@components/toolSection";
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
 import logger from "@lib/logger";
@@ -35,18 +35,18 @@ const Settings = (props: SettingsData) => {
 
   return (
     <Page backButton>
-      <ToolSectionWrapper fullWidth>
-        <ToolSectionHeader>
+      <PanelWrapper fullWidth>
+        <PanelHeader>
           <h2 className="p-4 text-lg font-bold">Settings</h2>
-        </ToolSectionHeader>
-        <ToolSectionBody className="text-md flex flex-col items-stretch p-4">
+        </PanelHeader>
+        <PanelBody className="text-md flex flex-col items-stretch p-4">
           <SettingsForm
             type="edit"
             onSubmit={saveChanges}
             defaultValues={props}
           />
-        </ToolSectionBody>
-      </ToolSectionWrapper>
+        </PanelBody>
+      </PanelWrapper>
     </Page>
   );
 };
