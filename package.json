@@ -2,7 +2,6 @@
   "name": "freelance-tool",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "db:start": "docker-compose -f ./devdb/docker-compose.yaml up -d && prisma generate && dotenv -e .env.local -- prisma migrate dev && dotenv -e .env.local -- prisma db push",
     "testdb:start": "docker-compose -f ./testdb/docker-compose.yaml up -d -V --force-recreate && prisma generate && dotenv -e .env.local -e .env -- prisma migrate dev && dotenv -e .env.local -e .env -- prisma db push",
