@@ -52,28 +52,17 @@ const EditClient = (props: EditClientProps) => {
   return (
     <Page menu={false}>
       <PanelWrapper className="self-center">
-        <PanelHeader className="pb-4 pt-4">
-          <h2 className="grow text-lg font-bold"> Edit Client</h2>
-
-          <div
-            className="mb-4 flex flex-row items-center border-b border-black
-              px-4 pb-4 text-white"
-          >
-            <h2 className="grow text-lg font-bold"> Edit Client</h2>
-          </div>
-
-          <div>
-            <ClientForm
-              onSubmit={modifyClient}
-              onDelete={async () => {
-                await deleteClient({ clientId: props.id });
-              }}
-              type="edit"
-              defaultValues={props}
-            />
-          </div>
-        </PanelHeader>
-        <PanelBody></PanelBody>
+        <PanelHeader title="Edit Client" />
+        <PanelBody>
+          <ClientForm
+            onSubmit={modifyClient}
+            onDelete={async () => {
+              await deleteClient({ clientId: props.id });
+            }}
+            type="edit"
+            defaultValues={props}
+          />
+        </PanelBody>
       </PanelWrapper>
     </Page>
   );

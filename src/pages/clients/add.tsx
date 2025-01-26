@@ -5,7 +5,11 @@ import { useMutation } from "react-query";
 
 import ClientForm, { ClientData } from "@components/forms/clientForm";
 import Page from "@components/page";
-import { PanelHeader, PanelWrapper } from "@components/panels/panel";
+import {
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
 import { withSessionSsrProtected } from "@lib/withSession";
@@ -29,14 +33,10 @@ const AddClient = () => {
   return (
     <Page menu={false}>
       <PanelWrapper className="self-center">
-        <PanelHeader className="pb-4 pt-4">
-          <h2
-            className="mb-4 border-b border-black pb-4 pl-4 text-lg font-bold"
-          >
-            Add Client
-          </h2>
+        <PanelHeader title="Add Client" />
+        <PanelBody>
           <ClientForm onSubmit={addClient} type="add" />
-        </PanelHeader>
+        </PanelBody>
       </PanelWrapper>
     </Page>
   );

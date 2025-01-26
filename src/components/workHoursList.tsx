@@ -4,6 +4,7 @@ import { MdEdit } from "react-icons/md";
 import { WorkHours } from "@prisma/client";
 
 import { PanelIconButton } from "./panels/panel";
+import { Table, TableBody, TableColumns } from "./panels/table";
 import Spinner from "./spinner";
 
 const WorkHoursList = (props: {
@@ -14,25 +15,24 @@ const WorkHoursList = (props: {
 }) => {
   return (
     <>
-      <table className="text-left">
-        <colgroup>
-          <col className="" />
-          <col className="w-25" />
-          <col className="w-25" />
-          <col className="w-25" />
-          <col className="w-12" />
-        </colgroup>
-
-        <thead className="border-b border-black bg-neutral-1">
-          <tr className="">
-            <th className="my-4 pl-4">Date</th>
-            <th className="mx-4 border-l border-black pl-4">Hours</th>
-            <th className="mx-4 border-l border-black py-2 pl-4">Rate</th>
-            <th className="mx-4 border-l border-black py-2 pl-4">Revenue</th>
-            <th className="mx-4 border-l border-black py-2 pl-4" />
-          </tr>
-        </thead>
-        <tbody className="min-h-[12%] px-4">
+      <Table>
+        <TableColumns
+          columns={[
+            {
+              title: "Date",
+            },
+            {
+              title: "Hours",
+            },
+            {
+              title: "Rate",
+            },
+            {
+              title: "Revenue",
+            },
+          ]}
+        />
+        <TableBody>
           {props.status === "success" &&
             props.workHours.map((workHours, index) => {
               return (
@@ -61,8 +61,8 @@ const WorkHoursList = (props: {
                 </tr>
               );
             })}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
 
       {props.status === "success" && props.workHours.length === 0 && (
         <div className="py-1 text-center">Empty</div>

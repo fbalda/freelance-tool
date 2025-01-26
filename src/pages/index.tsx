@@ -10,7 +10,6 @@ import Page from "@components/page";
 import {
   PanelBody,
   PanelHeader,
-  PanelIconButton,
   PanelWrapper,
 } from "@components/panels/panel";
 import FreelanceToolContext from "@lib/freelanceToolContext";
@@ -28,9 +27,7 @@ const FreelanceTool = () => {
     refetch,
   } = useQuery<ClientData[]>(
     ["clients"],
-    async () => {
-      return (await axios.get("/api/clients")).data as ClientData[];
-    },
+    async () => (await axios.get("/api/clients")).data as ClientData[],
     {
       refetchOnMount: true,
     },
@@ -55,49 +52,41 @@ const FreelanceTool = () => {
     "Work hours added",
   );
 
-  const onAddClient = async () => {
-    await Router.push("/clients/add");
+  const onAddClient = () => {
+    void Router.push("/clients/add");
   };
 
   return (
     <Page>
       <PanelWrapper fullWidth>
-        <PanelHeader className="pt-4">
-          <h2
-            className="mb-4 border-b border-neutral-4 pb-4 pl-4 text-lg
-              font-bold"
-          >
-            Add Work Hours
-          </h2>
+        <PanelHeader title="Add Work Hours" />
+        <PanelBody>
           <WorkHoursForm
             type="add"
             onSubmit={addWorkHours}
             clients={clients || []}
           />
-        </PanelHeader>
+        </PanelBody>
       </PanelWrapper>
       <PanelWrapper fullWidth>
-        <PanelHeader>
-          <div
-            className="flex flex-row items-center gap-2 px-4 py-4 text-white"
-          >
-            <h2 className="grow text-lg font-bold">Clients</h2>
-            <PanelIconButton
-              icon={MdRefresh}
-              tooltip="Refetch"
-              onClick={async () => {
-                await refetch();
-              }}
-            />
-
-            <PanelIconButton
-              icon={MdPersonAdd}
-              tooltip="Add Client"
-              onClick={onAddClient}
-            />
-          </div>
-        </PanelHeader>
-        <PanelBody className="flex flex-col items-stretch">
+        <PanelHeader
+          title="Clients"
+          buttons={[
+            {
+              icon: MdRefresh,
+              tooltip: "Refetch",
+              onClick: () => {
+                void refetch();
+              },
+            },
+            {
+              icon: MdPersonAdd,
+              tooltip: "Add Client",
+              onClick: onAddClient,
+            },
+          ]}
+        />
+        <PanelBody>
           <ClientList status={status} clients={clients || []} />
         </PanelBody>
       </PanelWrapper>

@@ -16,7 +16,7 @@ const FreelanceToolLayout = (
         <QueryClientProvider client={props.queryClient}>
           <div className="h-full w-full overflow-hidden">
             <main
-              className="m-4 box-border flex flex-col items-start
+              className="m-4 box-border flex flex-col items-center
                 justify-start"
             >
               {props.children}

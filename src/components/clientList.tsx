@@ -54,7 +54,7 @@ const ClientList = (props: {
         </TableBody>
       </Table>
       {props.status === "success" && props.clients.length === 0 && (
-        <div className="py-1 text-center">Empty</div>
+        <div className="pt-2 text-center text-neutral-3">Empty</div>
       )}
 
       {props.status === "loading" && (

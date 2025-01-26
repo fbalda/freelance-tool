@@ -54,7 +54,7 @@ export const ButtonBar = (props: {
 };
 
 export const Divider = () => {
-  return <hr className="mb-4 self-stretch border-neutral-2" />;
+  return <hr className="my-4 self-stretch border-neutral-4" />;
 };
 
 const InputGroup = <
@@ -74,14 +74,14 @@ const InputGroup = <
 
   return (
     <div
-      className={`flex h-20 max-w-xs flex-col ${
+      className={`flex max-w-xs flex-col justify-end ${
         props.className ? props.className : "" }`}
     >
       <label htmlFor={props.field}>
         {props.label + (props.rules.required ? " *" : "")}
       </label>
       <props.childType {...props} />
-      <div className="mb-2 text-sm text-red-600">{errorMessage}</div>
+      <div className="text-sm text-red-600">{errorMessage}</div>
     </div>
   );
 };

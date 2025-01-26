@@ -25,7 +25,7 @@ export const TableColumns = (props: {
               <th
                 key={index}
                 className={`${index > 0 ? "border-l border-neutral-4" : ""}
-                mx-4 py-1 pl-4`}
+                py-2 pl-4 text-sm`}
               >
                 {col.title}
               </th>
@@ -38,7 +38,7 @@ export const TableColumns = (props: {
 };
 
 export const TableBody = (props: PropsWithChildren) => (
-  <tbody className="min-h-[12%] px-4">{props.children}</tbody>
+  <tbody className="min-h-[12%] bg-neutral-5 px-4">{props.children}</tbody>
 );
 
 export const Table = (props: PropsWithChildren) => {

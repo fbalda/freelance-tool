@@ -36,10 +36,8 @@ const Settings = (props: SettingsData) => {
   return (
     <Page backButton>
       <PanelWrapper fullWidth>
-        <PanelHeader>
-          <h2 className="p-4 text-lg font-bold">Settings</h2>
-        </PanelHeader>
-        <PanelBody className="text-md flex flex-col items-stretch p-4">
+        <PanelHeader title="Settings" />
+        <PanelBody>
           <SettingsForm
             type="edit"
             onSubmit={saveChanges}

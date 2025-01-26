@@ -61,28 +61,26 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
   return (
     <Page backButton>
       <PanelWrapper fullWidth>
-        <PanelHeader>
-          <div
-            className="flex flex-row items-center gap-2 border-b border-black
-              p-4 text-white"
-          >
-            <h2 className="grow text-lg font-bold">{props.name}</h2>
-            <PanelIconButton
-              icon={MdRequestPage}
-              tooltip={"Create Invoice"}
-              onClick={async () => {
-                await Router.push(`/clients/${props.id}/create-invoice`);
-              }}
-            />
-            <PanelIconButton
-              icon={MdEdit}
-              tooltip={"Edit"}
-              onClick={async () => {
-                await Router.push(`/clients/${props.id}/edit`);
-              }}
-            />
-          </div>
-
+        <PanelHeader
+          title={props.name}
+          buttons={[
+            {
+              icon: MdRequestPage,
+              tooltip: "Create Invoice",
+              onClick: () => {
+                void Router.push(`/clients/${props.id}/create-invoice`);
+              },
+            },
+            {
+              icon: MdEdit,
+              tooltip: "Edit",
+              onClick: () => {
+                void Router.push(`/clients/${props.id}/edit`);
+              },
+            },
+          ]}
+        />
+        <PanelBody>
           <section className="mt-4 flex flex-row gap-20 px-4 pb-4 text-sm">
             <div>
               <h3 className="mb-2 mt-4 text-xs font-bold">Address</h3>
@@ -104,7 +102,7 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
             </div>
           </section>
 
-          <div className="flex flex-row gap-2 border-t border-black p-4">
+          <div className="flex flex-row gap-2 border-y border-neutral-4 p-4">
             <h2 className="text-md grow font-bold">Work Hours</h2>
             <PanelIconButton
               icon={MdRefresh}
@@ -114,8 +112,6 @@ const ClientDashboard = (props: Omit<Client, "userDataId">) => {
               }}
             />
           </div>
-        </PanelHeader>
-        <PanelBody className="flex flex-col items-stretch">
           <WorkHoursList
             status={status}
             workHours={workHours || []}

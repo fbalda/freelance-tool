@@ -6,6 +6,7 @@ import { useMutation } from "react-query";
 import {
   PanelBody,
   PanelHeader,
+  PanelSection,
   PanelWrapper,
 } from "@components/panels/panel";
 import prisma from "@lib/db";
@@ -51,12 +52,11 @@ const Login = () => {
 
   return (
     <PanelWrapper className="self-center">
-      <PanelHeader className="p-4">
-        <h2 className="text-center text-lg">Login</h2>
-      </PanelHeader>
-
-      <PanelBody className="p-4">
-        <LoginForm totpStep={totpStep} onSubmit={handleSubmit} />
+      <PanelHeader title="Login" />
+      <PanelBody>
+        <PanelSection>
+          <LoginForm totpStep={totpStep} onSubmit={handleSubmit} />
+        </PanelSection>
       </PanelBody>
     </PanelWrapper>
   );
