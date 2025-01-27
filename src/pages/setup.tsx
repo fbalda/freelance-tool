@@ -35,11 +35,9 @@ const Setup = () => {
 
   return (
     <PanelWrapper className="self-center">
-      <PanelHeader className="p-4">
-        <h2 className="text-left text-lg">Setup</h2>
-      </PanelHeader>
+      <PanelHeader title="Setup" />
 
-      <PanelBody className="py-4">
+      <PanelBody>
         <SettingsForm onSubmit={handleSubmit} type={"add"} />
       </PanelBody>
     </PanelWrapper>

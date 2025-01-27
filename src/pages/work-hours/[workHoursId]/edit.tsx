@@ -5,7 +5,11 @@ import { useMutation } from "react-query";
 
 import WorkHoursForm, { WorkHoursData } from "@components/forms/workHoursForm";
 import Page from "@components/page";
-import { PanelHeader, PanelWrapper } from "@components/panels/panel";
+import {
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
 import prisma from "@lib/db";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { withSessionSsrProtected } from "@lib/withSession";
@@ -84,13 +88,8 @@ const EditWorkHours = (props: EditWorkHoursProps) => {
   return (
     <Page menu={false}>
       <PanelWrapper className="self-center">
-        <PanelHeader className="pb-4 pt-4">
-          <div
-            className="mb-4 flex flex-row items-center border-b border-black
-              px-4 pb-4 text-white"
-          >
-            <h2 className="grow text-lg font-bold">Edit Work Hours</h2>
-          </div>
+        <PanelHeader title="Edit Work hours"></PanelHeader>
+        <PanelBody>
           <WorkHoursForm
             type="edit"
             defaultValues={{
@@ -101,7 +100,7 @@ const EditWorkHours = (props: EditWorkHoursProps) => {
             onDelete={deleteWorkHours}
             clients={props.clients}
           />
-        </PanelHeader>
+        </PanelBody>
       </PanelWrapper>
     </Page>
   );

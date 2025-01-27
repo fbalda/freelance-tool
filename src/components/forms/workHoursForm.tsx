@@ -43,7 +43,7 @@ const WorkHoursForm = (props: {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-start p-4"
+      className="flex flex-col items-start px-4 pb-2 pt-4"
     >
       <div className="flex flex-row items-end gap-2">
         <SelectInputGroup

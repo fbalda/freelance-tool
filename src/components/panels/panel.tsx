@@ -1,16 +1,6 @@
 import { MouseEventHandler, PropsWithChildren } from "react";
 import { IconType } from "react-icons";
 
-// export const PanelHeader = (
-//   props: PropsWithChildren<{ className?: string }>,
-// ) => {
-//   return (
-//     <div className="border-b border-neutral-4 bg-neutral-6 last:border-0">
-//       <div className={props.className}>{props.children}</div>
-//     </div>
-//   );
-// };
-
 export interface PanelIconButtonProps {
   icon: IconType;
   tooltip: string;
