@@ -1,16 +1,19 @@
-import {
-  ToolSectionBody,
-  ToolSectionHeader,
-  ToolSectionWrapper,
-} from "@components/toolSection";
-import prisma from "@lib/db";
-import FreelanceToolContext from "@lib/freelanceToolContext";
-import { useSubmitFunction } from "@lib/hooks";
-import { withSessionSsr } from "@lib/withSession";
 import axios from "axios";
 import Router from "next/router";
 import { useContext, useState } from "react";
 import { useMutation } from "react-query";
+
+import {
+  PanelBody,
+  PanelHeader,
+  PanelSection,
+  PanelWrapper,
+} from "@components/panels/panel";
+import prisma from "@lib/db";
+import FreelanceToolContext from "@lib/freelanceToolContext";
+import { useSubmitFunction } from "@lib/hooks";
+import { withSessionSsr } from "@lib/withSession";
+
 import LoginForm, { LoginCredentials } from "../components/forms/loginForm";
 
 const Login = () => {
@@ -48,15 +51,14 @@ const Login = () => {
   const handleSubmit = useSubmitFunction(mutate, addMessage, "Logged in");
 
   return (
-    <ToolSectionWrapper className="self-center">
-      <ToolSectionHeader className="p-4">
-        <h2 className="text-lg text-center">Login</h2>
-      </ToolSectionHeader>
-
-      <ToolSectionBody className="p-4">
-        <LoginForm totpStep={totpStep} onSubmit={handleSubmit} />
-      </ToolSectionBody>
-    </ToolSectionWrapper>
+    <PanelWrapper className="self-center">
+      <PanelHeader title="Login" />
+      <PanelBody>
+        <PanelSection>
+          <LoginForm totpStep={totpStep} onSubmit={handleSubmit} />
+        </PanelSection>
+      </PanelBody>
+    </PanelWrapper>
   );
 };
 

@@ -1,12 +1,14 @@
-import FreelanceToolContext from "@lib/freelanceToolContext";
 import axios, { AxiosError } from "axios";
 import Router from "next/router";
 import { PropsWithChildren, useContext } from "react";
 import { MdLogout, MdSettings } from "react-icons/md";
+
+import FreelanceToolContext from "@lib/freelanceToolContext";
+
 import HamburgerMenu from "./hamburgerMenu";
 
 const Page = (
-  props: PropsWithChildren<{ backButton?: boolean; menu?: boolean }>
+  props: PropsWithChildren<{ backButton?: boolean; menu?: boolean }>,
 ) => {
   const { addMessage } = useContext(FreelanceToolContext);
 
@@ -14,7 +16,7 @@ const Page = (
 
   return (
     <>
-      <div className="flex flex-row items-center w-full h-9 relative">
+      <div className="relative flex h-9 w-full flex-row items-center">
         {props.backButton ? (
           <button className="neutral-button ml-2" onClick={Router.back}>
             Back
@@ -48,7 +50,7 @@ const Page = (
                           response: string;
                         }
                       ).response || "Unknown error",
-                      "error"
+                      "error",
                     );
                   }
                 },

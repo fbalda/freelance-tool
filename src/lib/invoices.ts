@@ -1,4 +1,5 @@
 import PDFDocument from "pdfkit-table";
+
 import prisma from "./db";
 
 export interface InvoiceData {
@@ -8,10 +9,17 @@ export interface InvoiceData {
   serviceDate: Date;
 }
 
+const formatDate = (date: Date) =>
+  date.toLocaleDateString(new Intl.Locale("de"), {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
 const renderInvoice = async (
   userId: string,
   data: InvoiceData,
-  invoiceIndex: number
+  invoiceIndex: number,
 ) => {
   const user = await prisma.userData.findUnique({
     where: {
@@ -44,15 +52,15 @@ const renderInvoice = async (
       `${user.businessName}\n${user.street} ${user.houseNumber}\n` +
         `D-${user.zip} ${user.city}\n\nTelefon: ${user.phone}\n` +
         `E-Mail: ${user.email}\n\nDatum: ` +
-        `${data.invoiceDate.toLocaleDateString(new Intl.Locale("de"))}\n\n` +
+        `${formatDate(data.invoiceDate)}\n\n` +
         `Rechnungsnummer: ${data.serviceDate.getFullYear()}${(
-          "0" + data.serviceDate.getMonth().toString()
+          "0" + (data.serviceDate.getMonth() + 1).toString()
         ).slice(-2)}${("0000" + invoiceIndex.toString()).slice(
-          -5
+          -5,
         )}\nKundennummer: ${("0000" + client.clientNumber.toString()).slice(
-          -5
+          -5,
         )}`,
-      { align: "right" }
+      { align: "right" },
     );
 
   doc
@@ -65,7 +73,7 @@ const renderInvoice = async (
       130,
       {
         align: "left",
-      }
+      },
     );
 
   doc.fontSize(14).font("Helvetica-Bold").text("Rechnung\n\n", undefined, 230);
@@ -161,11 +169,7 @@ const renderInvoice = async (
   doc
     .fontSize(9)
     .font("Helvetica-Oblique")
-    .text(
-      `Leistungsdatum: ${data.serviceDate.toLocaleDateString(
-        new Intl.Locale("de")
-      )}`
-    );
+    .text(`Leistungsdatum: ${formatDate(data.serviceDate)}`);
 
   doc.moveTo(50, 670).lineTo(545, 670).stroke("black");
 
@@ -180,7 +184,7 @@ const renderInvoice = async (
     .text(
       `\nTest Bank\nIBAN: ${
         user.iban.match(/.{1,4}/g)?.join(" ") || ""
-      }\nBIC: ${user.bic}`
+      }\nBIC: ${user.bic}`,
     );
 
   doc
@@ -198,7 +202,7 @@ const renderInvoice = async (
 
   const bufferPromise = new Promise<Buffer>((resolve) => {
     doc.on("end", () => {
-      resolve(Buffer.concat(buffers));
+      resolve(Buffer.concat(buffers as unknown as ReadonlyArray<Uint8Array>));
     });
   });
 

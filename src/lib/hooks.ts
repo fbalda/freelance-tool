@@ -1,4 +1,3 @@
-import { Client } from "@prisma/client";
 import { useMemo, useRef, useState } from "react";
 import {
   FieldErrors,
@@ -7,6 +6,9 @@ import {
   RegisterOptions,
 } from "react-hook-form";
 import { UseMutateFunction } from "react-query";
+
+import { Client } from "@prisma/client";
+
 import { createSubmitFunction } from "./formHelpers";
 import { AddMessageFunction } from "./freelanceToolContext";
 
@@ -51,7 +53,7 @@ export const useFormErrorMessage = <TFieldValues extends FieldValues>(
   label: string,
   field: FieldPath<TFieldValues>,
   rules: RegisterOptions<TFieldValues, FieldPath<TFieldValues>>,
-  errors: FieldErrors<TFieldValues>
+  errors: FieldErrors<TFieldValues>,
 ) => {
   let error = "";
 
@@ -97,12 +99,12 @@ export const useSubmitFunction = <
   TData = unknown,
   TError = unknown,
   TVariables = void,
-  TContext = unknown
+  TContext = unknown,
 >(
   mutate: UseMutateFunction<TData, TError, TVariables, TContext>,
   addMessage: AddMessageFunction,
   successMessage: string,
-  onSuccess?: () => void
+  onSuccess?: () => void,
 ) => {
   return useMemo(() => {
     return createSubmitFunction(mutate, addMessage, successMessage, onSuccess);

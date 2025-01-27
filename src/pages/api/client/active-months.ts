@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import prisma from "@lib/db";
 import { withSessionRouteProtected } from "@lib/withSession";
-import { NextApiRequest, NextApiResponse } from "next";
 
 interface ClientActiveMonthsApiRequest extends NextApiRequest {
   body: {
@@ -15,7 +16,7 @@ export interface YearMonths {
 
 const clientActiveMonthRoute = async (
   req: ClientActiveMonthsApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => {
   if (!req.body.clientId) {
     return res.status(400).send({ response: "Invalid client id" });

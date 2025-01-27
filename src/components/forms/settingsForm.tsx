@@ -1,7 +1,9 @@
-import { UserData } from "@prisma/client";
 import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+import { UserData } from "@prisma/client";
+
 import { ButtonBar, Divider, TextInputGroup } from "./formElements";
 
 export type SettingsData = Omit<UserData, "id" | "salt" | "pwhash"> & {
@@ -50,10 +52,9 @@ const SettingsForm = (props: {
 
   return (
     <form
-      className="flex flex-col items-stretch justify-end px-4 py-2 
-    w-[48rem]"
+      className="flex w-[48rem] flex-col items-stretch justify-end px-4 py-2"
     >
-      <fieldset disabled={disabled}>
+      <fieldset disabled={disabled} className="flex flex-col gap-2">
         <TextInputGroup
           label="Username"
           field="username"
@@ -78,7 +79,7 @@ const SettingsForm = (props: {
             }}
             register={register}
             errors={errors}
-            className="max-w-[8rem] "
+            className="max-w-[8rem]"
           />
         ) : (
           <></>
@@ -94,7 +95,7 @@ const SettingsForm = (props: {
           }}
           register={register}
           errors={errors}
-          className="max-w-[8rem] "
+          className="max-w-[8rem]"
         />
         <TextInputGroup
           label={
@@ -105,7 +106,7 @@ const SettingsForm = (props: {
           rules={{
             required: props.type === "add",
             validate: (
-              val: string | number | boolean | Date | null | undefined
+              val: string | number | boolean | Date | null | undefined,
             ) => {
               if (watch("password") != val) {
                 return "Your passwords do no match";
@@ -143,7 +144,7 @@ const SettingsForm = (props: {
             }}
             register={register}
             errors={errors}
-            className="grow shrink-0"
+            className="shrink-0 grow"
           />
           <TextInputGroup
             label="House Number"
@@ -153,7 +154,7 @@ const SettingsForm = (props: {
             rules={{ maxLength: 10, required: true }}
             register={register}
             errors={errors}
-            className="shrink min-w-[1rem] max-w-[8rem]"
+            className="min-w-[1rem] max-w-[8rem] shrink"
           />
         </div>
         <div className="flex flex-row gap-2">
@@ -169,7 +170,7 @@ const SettingsForm = (props: {
             }}
             register={register}
             errors={errors}
-            className="shrink max-w-[6rem]"
+            className="max-w-[6rem] shrink"
           />
           <TextInputGroup
             label="City"
@@ -200,7 +201,7 @@ const SettingsForm = (props: {
           }}
           register={register}
           errors={errors}
-          className="shrink max-w-[6rem]"
+          className="max-w-[6rem] shrink"
         />
         <TextInputGroup
           label="Email Address"
@@ -211,7 +212,7 @@ const SettingsForm = (props: {
           rules={{ required: true }}
           register={register}
           errors={errors}
-          className="shrink max-w-[6rem]"
+          className="max-w-[6rem] shrink"
         />
         <Divider />
         <TextInputGroup
@@ -227,7 +228,7 @@ const SettingsForm = (props: {
           }}
           register={register}
           errors={errors}
-          className="shrink max-w-[6rem]"
+          className="max-w-[6rem] shrink"
         />
         <TextInputGroup
           label="BIC"
@@ -242,7 +243,7 @@ const SettingsForm = (props: {
           }}
           register={register}
           errors={errors}
-          className="shrink max-w-[6rem]"
+          className="max-w-[6rem] shrink"
         />
         <TextInputGroup
           label="Tax Number"
@@ -257,7 +258,7 @@ const SettingsForm = (props: {
           }}
           register={register}
           errors={errors}
-          className="shrink max-w-[6rem]"
+          className="max-w-[6rem] shrink"
         />
 
         <Divider />

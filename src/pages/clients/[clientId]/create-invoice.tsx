@@ -1,13 +1,18 @@
-import CreateInvoiceForm from "@components/forms/createInvoiceForm";
-import Page from "@components/page";
-import { ToolSectionHeader, ToolSectionWrapper } from "@components/toolSection";
-import FreelanceToolContext from "@lib/freelanceToolContext";
-import { useSubmitFunction } from "@lib/hooks";
-import { withSessionSsrProtected } from "@lib/withSession";
 import axios from "axios";
 import Router from "next/router";
 import { useContext } from "react";
 import { useMutation } from "react-query";
+
+import CreateInvoiceForm from "@components/forms/createInvoiceForm";
+import Page from "@components/page";
+import {
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
+import FreelanceToolContext from "@lib/freelanceToolContext";
+import { useSubmitFunction } from "@lib/hooks";
+import { withSessionSsrProtected } from "@lib/withSession";
 
 type CreateClientInvoiceProps = { clientId: string };
 
@@ -21,7 +26,7 @@ const CreateClientInvoice = (props: CreateClientInvoiceProps) => {
         month: data,
         clientId: props.clientId,
       },
-      { responseType: "blob" }
+      { responseType: "blob" },
     );
 
     const url = window.URL.createObjectURL(response.data);
@@ -40,28 +45,20 @@ const CreateClientInvoice = (props: CreateClientInvoiceProps) => {
     "Created Invoice",
     () => {
       Router.back();
-    }
+    },
   );
 
   return (
     <Page menu={false} backButton>
-      <ToolSectionWrapper className="self-center">
-        <ToolSectionHeader className="pt-4 pb-4">
-          <div
-            className="px-4 pb-4 mb-4 flex flex-row items-center text-white \
-            border-b border-black"
-          >
-            <h2 className="font-bold text-lg grow">Create Invoice</h2>
-          </div>
-
-          <div>
-            <CreateInvoiceForm
-              onSubmit={createInvoice}
-              clientId={props.clientId}
-            />
-          </div>
-        </ToolSectionHeader>
-      </ToolSectionWrapper>
+      <PanelWrapper className="self-center">
+        <PanelHeader title="Create Invoice" />
+        <PanelBody>
+          <CreateInvoiceForm
+            onSubmit={createInvoice}
+            clientId={props.clientId}
+          />
+        </PanelBody>
+      </PanelWrapper>
     </Page>
   );
 };

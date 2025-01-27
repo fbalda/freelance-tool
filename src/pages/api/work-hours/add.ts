@@ -11,7 +11,7 @@ interface AddWorkHoursApiRequest extends NextApiRequest {
 
 const addWorkHoursRoute = async (
   req: AddWorkHoursApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => {
   if (!req.session.authorized) {
     return res.status(401).send({ response: "Unauthorized" });

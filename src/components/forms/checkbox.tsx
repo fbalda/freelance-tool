@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import { FieldValues } from "react-hook-form";
+
 import { InputProps } from "./input";
 
 export type CheckboxProps<TFieldValues extends FieldValues> =
@@ -28,7 +29,7 @@ const InputWrapper = forwardRef<
 InputWrapper.displayName = "Input";
 
 const Checkbox = <TFieldValues extends FieldValues>(
-  props: CheckboxProps<TFieldValues> & { error?: boolean }
+  props: CheckboxProps<TFieldValues> & { error?: boolean },
 ) => {
   return (
     <input

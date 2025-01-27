@@ -11,7 +11,7 @@ interface UpdateSettingsApiRequest extends NextApiRequest {
 
 const setupRoute = async (
   req: UpdateSettingsApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => {
   if (req.body.zip) {
     // Text input of type number still provides number as string

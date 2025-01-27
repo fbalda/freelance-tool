@@ -1,7 +1,8 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import prisma from "@lib/db";
 import logger from "@lib/logger";
 import { withSessionRouteProtected } from "@lib/withSession";
-import { NextApiRequest, NextApiResponse } from "next";
 
 interface DeleteClientApiRequest extends NextApiRequest {
   body: {
@@ -11,7 +12,7 @@ interface DeleteClientApiRequest extends NextApiRequest {
 
 const deleteClientRoute = async (
   req: DeleteClientApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => {
   try {
     await prisma.client.delete({

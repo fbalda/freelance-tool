@@ -17,7 +17,6 @@ CREATE TABLE "user_data" (
     "bic" VARCHAR(11) NOT NULL,
     "taxNumber" VARCHAR(60) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL,
-
     CONSTRAINT "user_data_pkey" PRIMARY KEY ("id")
 );
 
@@ -34,19 +33,17 @@ CREATE TABLE "client" (
     "zip" INTEGER NOT NULL,
     "country" VARCHAR(2) NOT NULL,
     "userDataId" TEXT NOT NULL,
-
     CONSTRAINT "client_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "WorkHours" (
+CREATE TABLE "work_hours" (
     "id" TEXT NOT NULL,
     "hours" SMALLINT NOT NULL,
     "rate" SMALLINT NOT NULL,
     "date" DATE NOT NULL,
     "clientId" TEXT NOT NULL,
-
-    CONSTRAINT "WorkHours_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "work_hours_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -62,7 +59,13 @@ CREATE UNIQUE INDEX "client_userDataId_clientNumber_key" ON "client"("userDataId
 CREATE UNIQUE INDEX "client_userDataId_name_key" ON "client"("userDataId", "name");
 
 -- AddForeignKey
-ALTER TABLE "client" ADD CONSTRAINT "client_userDataId_fkey" FOREIGN KEY ("userDataId") REFERENCES "user_data"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE
+    "client"
+ADD
+    CONSTRAINT "client_userDataId_fkey" FOREIGN KEY ("userDataId") REFERENCES "user_data"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WorkHours" ADD CONSTRAINT "WorkHours_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "client"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE
+    "work_hours"
+ADD
+    CONSTRAINT "work_hours_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "client"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

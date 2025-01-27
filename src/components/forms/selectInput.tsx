@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
+
 import { InputProps } from "./input";
 
 export type SelectInputProps<TFieldValues extends FieldValues> =
@@ -10,7 +11,7 @@ export type SelectInputProps<TFieldValues extends FieldValues> =
   };
 
 const SelectInput = <TFieldValues extends FieldValues>(
-  props: SelectInputProps<TFieldValues> & { error?: boolean }
+  props: SelectInputProps<TFieldValues> & { error?: boolean },
 ) => {
   // We use a workaround to display the default value as gray, since we use
   // react-hook-form and therefore can't style with the :invalid selector.
@@ -25,8 +26,8 @@ const SelectInput = <TFieldValues extends FieldValues>(
       defaultValue={props.defaultValue || ""}
       aria-invalid={props.error ? true : false}
       className={`form-control ${props.error ? "error" : ""} ${
-        props.defaultValue || wasChanged ? "" : "text-gray-600"
-      } ${props.className ? props.className : ""}`}
+        props.defaultValue || wasChanged ? "" : "text-neutral-3" }
+        ${props.className ? props.className : ""}`}
       {...props.register(props.field, rules)}
       onChange={(event) => {
         setWasChanged(true);

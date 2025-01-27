@@ -1,13 +1,18 @@
-import ClientForm, { ClientData } from "@components/forms/clientForm";
-import Page from "@components/page";
-import { ToolSectionHeader, ToolSectionWrapper } from "@components/toolSection";
-import FreelanceToolContext from "@lib/freelanceToolContext";
-import { useSubmitFunction } from "@lib/hooks";
-import { withSessionSsrProtected } from "@lib/withSession";
 import axios from "axios";
 import Router from "next/router";
 import { useContext } from "react";
 import { useMutation } from "react-query";
+
+import ClientForm, { ClientData } from "@components/forms/clientForm";
+import Page from "@components/page";
+import {
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
+import FreelanceToolContext from "@lib/freelanceToolContext";
+import { useSubmitFunction } from "@lib/hooks";
+import { withSessionSsrProtected } from "@lib/withSession";
 
 const AddClient = () => {
   const { addMessage } = useContext(FreelanceToolContext);
@@ -22,22 +27,17 @@ const AddClient = () => {
     "Client added",
     () => {
       Router.back();
-    }
+    },
   );
 
   return (
     <Page menu={false}>
-      <ToolSectionWrapper className="self-center">
-        <ToolSectionHeader className="pt-4 pb-4">
-          <h2
-            className="pl-4 pb-4 mb-4 text-lg font-bold border-b \
-          border-black"
-          >
-            Add Client
-          </h2>
+      <PanelWrapper className="self-center">
+        <PanelHeader title="Add Client" />
+        <PanelBody>
           <ClientForm onSubmit={addClient} type="add" />
-        </ToolSectionHeader>
-      </ToolSectionWrapper>
+        </PanelBody>
+      </PanelWrapper>
     </Page>
   );
 };

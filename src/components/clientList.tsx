@@ -1,5 +1,8 @@
-import { ClientData } from "@lib/hooks";
 import Link from "next/link";
+
+import { ClientData } from "@lib/hooks";
+
+import { Table, TableBody, TableColumns } from "./panels/table";
 import Spinner from "./spinner";
 
 const ClientList = (props: {
@@ -8,36 +11,25 @@ const ClientList = (props: {
 }) => {
   return (
     <>
-      <table className="text-left">
-        <colgroup>
-          <col className="" />
-          <col className="w-40" />
-          <col className="w-60" />
-          <col className="w-60" />
-        </colgroup>
-
-        <thead className="bg-neutral-1 border-b border-black">
-          <tr className="">
-            <th className="my-4 pl-4">Name</th>
-            <th className="my-4 border-l pl-4 border-black">Client Number</th>
-            <th className="mx-4 py-2 border-l pl-4 border-black">
-              Work Last Month
-            </th>
-            <th className="mx-4 border-l pl-4 border-black">
-              Work Current Month
-            </th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table>
+        <TableColumns
+          columns={[
+            { title: "Name" },
+            { title: "Client Number", width: 10 },
+            { title: "Last Month", width: 10 },
+            { title: "Current Month", width: 10 },
+          ]}
+        />
+        <TableBody>
           {props.status === "success" &&
             props.clients.map((client, index) => {
               return (
                 <tr
-                  className="border-neutral-2 border-b last:border-0 \
-                    last:mb-0 last:pb-0"
+                  className="border-b border-neutral-2 last:mb-0 last:border-0
+                    last:pb-0"
                   key={index}
                 >
-                  <td className="pl-4 py-2">
+                  <td className="py-2 pl-4">
                     <Link
                       className="link"
                       href={`/clients/${encodeURIComponent(client.id)}`}
@@ -45,25 +37,24 @@ const ClientList = (props: {
                       {client.name}
                     </Link>
                   </td>
-                  <td className="pl-4 py-2">{`${(
+                  <td className="py-2 pl-4">{`${(
                     "0000" + client.clientNumber.toString()
                   ).slice(-5)}`}</td>
-                  <td className="pl-4 py-2">
+                  <td className="py-2 pl-4">
                     {`${client.lastMonthRevenue}€ /\
                      ${client.lastMonthHours}h`}
                   </td>
-                  <td className="pl-4 py-2 text-green-300">
+                  <td className="py-2 pl-4 text-green-300">
                     {`${client.currentMonthRevenue}€ / \
                       ${client.currentMonthHours}h`}
                   </td>
                 </tr>
               );
             })}
-        </tbody>
-      </table>
-
+        </TableBody>
+      </Table>
       {props.status === "success" && props.clients.length === 0 && (
-        <div className="text-center py-1">Empty</div>
+        <div className="pt-2 text-center text-neutral-3">Empty</div>
       )}
 
       {props.status === "loading" && (

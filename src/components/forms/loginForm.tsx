@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Divider, TextInputGroup } from "./formElements";
+
+import { TextInputGroup } from "./formElements";
 
 export interface LoginCredentials {
   username?: string;
@@ -28,7 +29,10 @@ const LoginForm = (props: {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <fieldset disabled={disabled}>
+      <fieldset
+        disabled={disabled}
+        className="flex min-w-64 flex-col items-stretch gap-2"
+      >
         {!props.totpStep ? (
           <>
             <TextInputGroup
@@ -62,12 +66,11 @@ const LoginForm = (props: {
             errors={errors}
           />
         )}
-        <Divider />
-        <div className="submit">
-          <button className="button w-full" type="submit">
-            Login
-          </button>
-        </div>
+        {/* <div className="submit self-stretch"> */}
+        <button className="button mt-4" type="submit">
+          Login
+        </button>
+        {/* </div> */}
       </fieldset>
     </form>
   );

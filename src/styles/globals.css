@@ -4,28 +4,28 @@
 
 @layer components {
   body {
-    @apply bg-neutral-2 text-white text-sm;
+    @apply bg-neutral-7 text-sm text-white;
   }
 
   /* TODO: Move as much as possible to implementation*/
   .form-label {
-    @apply w-48 px-2 py-1 text-right mr-1 text-sm;
+    @apply mr-1 w-48 px-2 py-1 text-right text-sm;
   }
 
   .button {
-    @apply bg-secondary-1 text-neutral-2 rounded-md px-3 py-1;
+    @apply rounded-md bg-secondary-1 px-3 py-1 text-neutral-6;
   }
 
   .neutral-button {
-    @apply text-white border border-white rounded-md px-3 py-1;
+    @apply rounded-md border border-white px-3 py-1 text-white;
   }
 
   .delete-button {
-    @apply text-red-400 border border-red-400 rounded-md px-3 py-1;
+    @apply rounded-md border border-red-400 px-3 py-1 text-red-400;
   }
 
   .cancel-button {
-    @apply text-white rounded-md px-3 py-1;
+    @apply rounded-md px-3 py-1 text-white;
   }
 
   .form-group {
@@ -33,11 +33,11 @@
   }
 
   .form-control {
-    @apply rounded-md h-7 text-sm mb-1 px-2 py-1 bg-neutral-2 text-white border border-black outline-none focus:border-blue-600;
+    @apply h-7 rounded-md border border-neutral-4 bg-neutral-5 px-2 py-1 text-sm text-white outline-none focus:border-blue-600;
   }
 
   .form-control::placeholder {
-    @apply text-neutral-600;
+    @apply text-neutral-7;
   }
 
   .form-control.error {
@@ -45,6 +45,6 @@
   }
 
   .link {
-    @apply hover:underline text-tertiary;
+    @apply text-tertiary hover:underline;
   }
 }

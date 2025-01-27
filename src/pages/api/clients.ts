@@ -19,18 +19,18 @@ const clientsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   const now = new Date();
 
   const currentMonthDate = new Date(now.getFullYear(), now.getMonth());
-  const lastMonthDate = new Date(
-    now.getFullYear(),
-    // Month -1 is December of previous year, so this works
-    now.getMonth() - 1
-  );
+  const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1);
+  const nextMonthDate = new Date(now.getFullYear(), now.getMonth() + 1);
 
   const output: ClientData[] = [];
 
   for (let i = 0; i < clients.length; i++) {
     // Get current month's work
     const workCurrentMonth = await prisma.workHours.findMany({
-      where: { client: clients[i], date: { gte: currentMonthDate } },
+      where: {
+        client: clients[i],
+        date: { gte: currentMonthDate, lt: nextMonthDate },
+      },
     });
 
     const hoursRevenueCurrentMonth = workCurrentMonth.reduce<{
@@ -44,7 +44,7 @@ const clientsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
             previousValue.revenue + currentValue.hours * currentValue.rate,
         };
       },
-      { hours: 0, revenue: 0 }
+      { hours: 0, revenue: 0 },
     );
 
     // Get last month's work
@@ -66,7 +66,7 @@ const clientsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
             previousValue.revenue + currentValue.hours * currentValue.rate,
         };
       },
-      { hours: 0, revenue: 0 }
+      { hours: 0, revenue: 0 },
     );
 
     output.push({

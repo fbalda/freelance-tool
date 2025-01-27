@@ -1,4 +1,5 @@
 import { FieldValues } from "react-hook-form";
+
 import { InputProps } from "./input";
 
 type InputStringTypes =
@@ -17,7 +18,7 @@ export interface TextInputProps<TFieldValues extends FieldValues>
 }
 
 const TextInput = <TFieldValues extends FieldValues>(
-  props: TextInputProps<TFieldValues> & { error?: boolean }
+  props: TextInputProps<TFieldValues> & { error?: boolean },
 ) => {
   return (
     <input

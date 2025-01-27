@@ -1,6 +1,8 @@
-import { Client, WorkHours } from "@prisma/client";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
+
+import { Client, WorkHours } from "@prisma/client";
+
 import {
   ButtonBar,
   DateTimeInputGroup,
@@ -41,7 +43,7 @@ const WorkHoursForm = (props: {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-start px-4 py-2"
+      className="flex flex-col items-start px-4 pb-2 pt-4"
     >
       <div className="flex flex-row items-end gap-2">
         <SelectInputGroup
@@ -87,7 +89,7 @@ const WorkHoursForm = (props: {
           errors={errors}
         />
         {props.type === "add" ? (
-          <div className="flex flex-row justify-end gap-2 mb-8">
+          <div className="flex flex-row justify-end gap-2">
             <button type="submit" className="button ml-3">
               {props.type === "add" ? "Add" : "Save Changes"}
             </button>

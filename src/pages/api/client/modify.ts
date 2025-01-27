@@ -1,8 +1,9 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import prisma from "@lib/db";
 import logger from "@lib/logger";
 import { withSessionRouteProtected } from "@lib/withSession";
 import { Client } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
 
 interface ModifyClientApiRequest extends NextApiRequest {
   body: Omit<Client, "clientNumber"> & {
@@ -12,7 +13,7 @@ interface ModifyClientApiRequest extends NextApiRequest {
 
 const modifyClientRoute = async (
   req: ModifyClientApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => {
   req.body.userDataId = req.session.userId;
 

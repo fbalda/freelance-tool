@@ -11,7 +11,7 @@ interface ModifyWorkHoursApiRequest extends NextApiRequest {
 
 const modifyWorkHoursRoute = async (
   req: ModifyWorkHoursApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => {
   if (req.body.hours) {
     // Text input of type number still provides number as string

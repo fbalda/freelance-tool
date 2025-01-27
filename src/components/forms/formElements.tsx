@@ -1,6 +1,8 @@
-import { useFormErrorMessage } from "@lib/hooks";
 import { ComponentType, MouseEvent } from "react";
 import { FieldValues } from "react-hook-form";
+
+import { useFormErrorMessage } from "@lib/hooks";
+
 import Checkbox, { CheckboxProps } from "./checkbox";
 import DateTimeInput, { DateTimeInputProps } from "./dateTimeInput";
 import { InputProps } from "./input";
@@ -29,7 +31,7 @@ export const ButtonBar = (props: {
   };
 
   return (
-    <div className="flex flex-row justify-start gap-2 w-full">
+    <div className="mb-2 flex w-full flex-row justify-start gap-2">
       <button type="submit" className="button" onClick={onSubmit}>
         {props.submitLabel}
       </button>
@@ -52,41 +54,40 @@ export const ButtonBar = (props: {
 };
 
 export const Divider = () => {
-  return <hr className="border-neutral-2 mb-4 self-stretch" />;
+  return <hr className="my-4 self-stretch border-neutral-4" />;
 };
 
 const InputGroup = <
   TFieldValues extends FieldValues,
-  TInputProps extends InputProps<TFieldValues>
+  TInputProps extends InputProps<TFieldValues>,
 >(
   props: TInputProps & {
     childType: ComponentType<TInputProps>;
-  }
+  },
 ) => {
   const errorMessage = useFormErrorMessage(
     props.label,
     props.field,
     props.rules,
-    props.errors
+    props.errors,
   );
 
   return (
     <div
-      className={`flex flex-col h-20 max-w-xs ${
-        props.className ? props.className : ""
-      }`}
+      className={`flex max-w-xs flex-col justify-end ${
+        props.className ? props.className : "" }`}
     >
       <label htmlFor={props.field}>
         {props.label + (props.rules.required ? " *" : "")}
       </label>
       <props.childType {...props} />
-      <div className="text-red-600 mb-2 text-sm">{errorMessage}</div>
+      <div className="text-sm text-red-600">{errorMessage}</div>
     </div>
   );
 };
 
 export const TextInputGroup = <TFieldValues extends FieldValues>(
-  props: TextInputProps<TFieldValues>
+  props: TextInputProps<TFieldValues>,
 ) => {
   return InputGroup<TFieldValues, typeof props>({
     ...props,
@@ -95,7 +96,7 @@ export const TextInputGroup = <TFieldValues extends FieldValues>(
 };
 
 export const SelectInputGroup = <TFieldValues extends FieldValues>(
-  props: SelectInputProps<TFieldValues>
+  props: SelectInputProps<TFieldValues>,
 ) => {
   return InputGroup<TFieldValues, typeof props>({
     ...props,
@@ -104,7 +105,7 @@ export const SelectInputGroup = <TFieldValues extends FieldValues>(
 };
 
 export const DateTimeInputGroup = <TFieldValues extends FieldValues>(
-  props: DateTimeInputProps<TFieldValues>
+  props: DateTimeInputProps<TFieldValues>,
 ) => {
   return InputGroup<TFieldValues, typeof props>({
     ...props,
@@ -113,7 +114,7 @@ export const DateTimeInputGroup = <TFieldValues extends FieldValues>(
 };
 
 export const CheckboxGroup = <TFieldValues extends FieldValues>(
-  props: CheckboxProps<TFieldValues>
+  props: CheckboxProps<TFieldValues>,
 ) => {
   return InputGroup<TFieldValues, typeof props>({
     ...props,

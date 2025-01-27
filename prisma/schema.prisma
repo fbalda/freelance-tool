@@ -57,4 +57,6 @@ model WorkHours {
   client   Client   @relation(fields: [clientId], references: [id])
   date     DateTime @db.Date
   clientId String
+
+  @@map(name: "work_hours")
 }

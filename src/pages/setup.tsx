@@ -1,17 +1,18 @@
-import SettingsForm, { SettingsData } from "@components/forms/settingsForm";
-import {
-  ToolSectionBody,
-  ToolSectionHeader,
-  ToolSectionWrapper,
-} from "@components/toolSection";
-import prisma from "@lib/db";
-import FreelanceToolContext from "@lib/freelanceToolContext";
-import { useSubmitFunction } from "@lib/hooks";
-import { withSessionSsr } from "@lib/withSession";
 import axios from "axios";
 import Router from "next/router";
 import { useContext } from "react";
 import { useMutation } from "react-query";
+
+import SettingsForm, { SettingsData } from "@components/forms/settingsForm";
+import {
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
+import prisma from "@lib/db";
+import FreelanceToolContext from "@lib/freelanceToolContext";
+import { useSubmitFunction } from "@lib/hooks";
+import { withSessionSsr } from "@lib/withSession";
 
 const Setup = () => {
   const { addMessage } = useContext(FreelanceToolContext);
@@ -33,15 +34,13 @@ const Setup = () => {
   const handleSubmit = useSubmitFunction(mutate, addMessage, "User created");
 
   return (
-    <ToolSectionWrapper className="self-center">
-      <ToolSectionHeader className="p-4">
-        <h2 className="text-lg text-left">Setup</h2>
-      </ToolSectionHeader>
+    <PanelWrapper className="self-center">
+      <PanelHeader title="Setup" />
 
-      <ToolSectionBody className="py-4">
+      <PanelBody>
         <SettingsForm onSubmit={handleSubmit} type={"add"} />
-      </ToolSectionBody>
-    </ToolSectionWrapper>
+      </PanelBody>
+    </PanelWrapper>
   );
 };
 
