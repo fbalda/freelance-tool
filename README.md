@@ -34,5 +34,6 @@ If you want to test without an SSL certificate set `--env NODE_ENV=development` 
 - Polish/streamline gui
 - Code cleanup
 - i18n
+- Pagination
 
 ## Known issues
