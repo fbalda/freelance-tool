@@ -33,5 +33,6 @@ If you want to test without an SSL certificate set `--env NODE_ENV=development` 
 - Automated invoice creation (idea is to send them to your email account automatically, so you can just forward them after checking for errors)
 - Polish/streamline gui
 - Code cleanup
+- i18n
 
 ## Known issues
