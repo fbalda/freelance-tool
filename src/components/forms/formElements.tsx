@@ -31,7 +31,7 @@ export const ButtonBar = (props: {
   };
 
   return (
-    <div className="flex w-full flex-row justify-start gap-2">
+    <div className="mb-2 flex w-full flex-row justify-start gap-2">
       <button type="submit" className="button" onClick={onSubmit}>
         {props.submitLabel}
       </button>

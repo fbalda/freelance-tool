@@ -5,7 +5,11 @@ import { useMutation } from "react-query";
 
 import CreateInvoiceForm from "@components/forms/createInvoiceForm";
 import Page from "@components/page";
-import { PanelHeader, PanelWrapper } from "@components/panels/panel";
+import {
+  PanelBody,
+  PanelHeader,
+  PanelWrapper,
+} from "@components/panels/panel";
 import FreelanceToolContext from "@lib/freelanceToolContext";
 import { useSubmitFunction } from "@lib/hooks";
 import { withSessionSsrProtected } from "@lib/withSession";
@@ -47,21 +51,13 @@ const CreateClientInvoice = (props: CreateClientInvoiceProps) => {
   return (
     <Page menu={false} backButton>
       <PanelWrapper className="self-center">
-        <PanelHeader className="pb-4 pt-4">
-          <div
-            className="mb-4 flex flex-row items-center border-b border-black
-              px-4 pb-4 text-white"
-          >
-            <h2 className="grow text-lg font-bold">Create Invoice</h2>
-          </div>
-
-          <div>
-            <CreateInvoiceForm
-              onSubmit={createInvoice}
-              clientId={props.clientId}
-            />
-          </div>
-        </PanelHeader>
+        <PanelHeader title="Create Invoice" />
+        <PanelBody>
+          <CreateInvoiceForm
+            onSubmit={createInvoice}
+            clientId={props.clientId}
+          />
+        </PanelBody>
       </PanelWrapper>
     </Page>
   );

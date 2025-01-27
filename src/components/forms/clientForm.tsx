@@ -47,7 +47,7 @@ const ClientForm = (props: {
     <form
       className="flex w-[48rem] flex-col items-stretch justify-end px-4 py-2"
     >
-      <fieldset disabled={disabled}>
+      <fieldset disabled={disabled} className="flex flex-col gap-2">
         <TextInputGroup
           label="Name"
           field="name"
